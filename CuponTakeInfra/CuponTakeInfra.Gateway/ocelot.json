@@ -1,0 +1,71 @@
+﻿{
+  "GlobalConfiguration": {
+    "RateLimitOptions": {
+      "EnableRateLimit": true,
+      "Period": "10s",
+      "PeriodTimeSpan": 10,
+      "Limit": 3
+    }
+  },
+  "Routes": [{
+    "UpstreamPathTemplate": "/auth/login",
+    "DownstreamPathTemplate": "/login",
+    "UpstreamMethods": ["Get"],
+    "DownstreamScheme": "http",
+    "DownstreamHostAndPorts": [{
+      "Host": "localhost",
+      "Port": 5039
+    }]
+  },
+    {
+      "UpstreamPathTemplate": "/auth/register",
+      "DownstreamPathTemplate": "/register",
+      "UpstreamMethods": ["Post"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 5039
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/auth/user",
+      "DownstreamPathTemplate": "/user",
+      "UpstreamHttpMethod": ["Get"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 5039
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/cupon/reedem",
+      "DownstreamPathTemplate": "/reedem",
+      "UpstreamMethods": ["Get"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 7125
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/cupon/points",
+      "DownstreamPathTemplate": "/points",
+      "UpstreamHttpMethod": ["Post"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 7125
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/cupon/history",
+      "DownstreamPathTemplate": "/history",
+      "UpstreamHttpMethod": ["Get"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 7125
+      }]
+    }
+  ]
+}

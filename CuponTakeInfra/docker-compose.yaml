@@ -1,0 +1,43 @@
+version: '3.9'
+
+networks:
+  cupontake-infra:
+  db-acces:
+
+volumes:
+  cupon-take-db:
+
+services:
+  cupontake-db:
+    image: postgres:latest
+    container_name: postgres-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+    networks:
+      - db-acces
+    volumes:
+      - cupon-take-db:/var/lib/postgresql/data
+
+  cupontake-auth:
+    image: cupontake-auth:latest
+    ports:
+      - 5039:80
+    networks:
+      - cupontake-infra
+      - db-acces
+    depends_on:
+      - cupontake-db    
+  
+  cupontake-cupon-generator:
+    image: cupontake-generator:latest
+    ports:
+      - 7125:80
+    networks:
+      - cupontake-infra
+      - db-acces
+    depends_on:
+      - cupontake-auth
+      - cupontake-db

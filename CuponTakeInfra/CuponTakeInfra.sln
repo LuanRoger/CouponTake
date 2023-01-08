@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuponTakeInfra.Auth", "CuponTakeInfra.Auth\CuponTakeInfra.Auth.csproj", "{34C376DE-C3D3-47EA-B213-F3FB88A698FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuponTakeInfra.Db", "CuponTakeInfra.Db\CuponTakeInfra.Db.csproj", "{51326270-2441-4A99-AD84-C1E6729D75A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuponTakeInfra.CuponGeneration", "CuponTakeInfra.CuponGeneration\CuponTakeInfra.CuponGeneration.csproj", "{E2BD8607-4B6C-4E28-80D0-F6383F8374D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuponTakeInfra.Gateway", "CuponTakeInfra.Gateway\CuponTakeInfra.Gateway.csproj", "{146842C3-EE2C-4DE8-BB46-6C6B4C2F2D1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34C376DE-C3D3-47EA-B213-F3FB88A698FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C376DE-C3D3-47EA-B213-F3FB88A698FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C376DE-C3D3-47EA-B213-F3FB88A698FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C376DE-C3D3-47EA-B213-F3FB88A698FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51326270-2441-4A99-AD84-C1E6729D75A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51326270-2441-4A99-AD84-C1E6729D75A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51326270-2441-4A99-AD84-C1E6729D75A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51326270-2441-4A99-AD84-C1E6729D75A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2BD8607-4B6C-4E28-80D0-F6383F8374D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BD8607-4B6C-4E28-80D0-F6383F8374D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BD8607-4B6C-4E28-80D0-F6383F8374D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BD8607-4B6C-4E28-80D0-F6383F8374D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146842C3-EE2C-4DE8-BB46-6C6B4C2F2D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146842C3-EE2C-4DE8-BB46-6C6B4C2F2D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146842C3-EE2C-4DE8-BB46-6C6B4C2F2D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146842C3-EE2C-4DE8-BB46-6C6B4C2F2D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
