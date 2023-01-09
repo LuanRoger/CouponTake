@@ -1,16 +1,9 @@
-import 'package:cupon_take/pages/home_page.dart';
+import 'package:cupon_take/pages/home_page/home_page.dart';
+import 'package:cupon_take/shared/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-      home: const HomePage(),
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        colorScheme: ColorScheme.fromSwatch(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.lightBlue,
-          primaryColorDark: Colors.purple,
-        ),
-      )));
+  runApp(
+    MaterialApp(home: const HomePage(), theme: AppThemeData.appDarkTheme),
+  );
 }
