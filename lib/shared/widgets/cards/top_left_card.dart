@@ -1,8 +1,8 @@
-import 'package:cupon_take/widgets/cards/cards_base.dart';
+import 'package:cupon_take/shared/widgets/cards/cards_base.dart';
 import 'package:flutter/material.dart';
 
-class BottomCard extends CardBase {
-  BottomCard({super.key, required super.cardTitle});
+class TopLeftCard extends CardBase {
+  TopLeftCard({super.key, required super.cardTitle});
 
   @override
   Widget? headerActions(BuildContext context) {

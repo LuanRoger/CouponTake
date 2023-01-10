@@ -1,4 +1,4 @@
-import 'package:cupon_take/widgets/card_title.dart';
+import 'package:cupon_take/shared/widgets/card_title.dart';
 import 'package:flutter/material.dart';
 
 abstract class CardBase extends StatelessWidget {

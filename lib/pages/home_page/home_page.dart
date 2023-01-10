@@ -1,3 +1,4 @@
+import 'package:cupon_take/pages/home_page/sections/history_section.dart';
 import 'package:cupon_take/pages/home_page/sections/home_section.dart';
 import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ class HomePage extends HookWidget {
     switch (index) {
       case 0:
         return HomeSection();
+      case 2:
+        return HistorySection();
       default:
         return HomeSection();
     }
@@ -16,8 +19,10 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainContentState = useState<Widget>(const HomeSection());
-    final selectedRailIndexState = useState(0);
+    const int initialPageIndex = 2;
+    final selectedRailIndexState = useState(initialPageIndex);
+    final mainContentState =
+        useState<Widget>(_changeDestination(initialPageIndex));
 
     return Scaffold(
       body: SafeArea(
@@ -55,9 +60,17 @@ class HomePage extends HookWidget {
             ),
             Expanded(
                 child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: mainContentState.value,
-            ))
+                  padding: const EdgeInsets.all(10.0),
+                  child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      child: mainContentState.value),
+                ))
           ],
         ),
       ),

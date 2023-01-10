@@ -1,8 +1,8 @@
 import 'package:cupon_take/models/user_info.dart';
 import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
-import 'package:cupon_take/widgets/cards/bottom_card.dart';
-import 'package:cupon_take/widgets/cards/top_left_card.dart';
-import 'package:cupon_take/widgets/cards/top_right_card.dart';
+import 'package:cupon_take/shared/widgets/cards/top_left_card.dart';
+import 'package:cupon_take/shared/widgets/cards/left_card.dart';
+import 'package:cupon_take/shared/widgets/cards/bottom_right_card.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -19,11 +19,11 @@ class HomeSection extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: BottomCard(cardTitle: "Pontos"),
+              child: TopLeftCard(cardTitle: "Pontos"),
             ),
             Expanded(
               flex: 1,
-              child: TopRightCard(UserInfo("lroger"), cardTitle: "Resgatar"),
+              child: BottomRightCard(UserInfo("lroger"), cardTitle: "Resgatar"),
             ),
           ],
         ),
@@ -35,7 +35,7 @@ class HomeSection extends StatelessWidget {
       items.add(ResponsiveRowColumnItem(
         rowFlex: 1,
         columnFlex: 1,
-        child: TopLeftCard(cardTitle: "Histórico"),
+        child: LeftCard(cardTitle: "Histórico"),
       ));
     }
 

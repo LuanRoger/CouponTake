@@ -1,12 +1,12 @@
 import 'package:cupon_take/models/user_info.dart';
-import 'package:cupon_take/widgets/cards/cards_base.dart';
-import 'package:cupon_take/widgets/user_info_chip.dart';
+import 'package:cupon_take/shared/widgets/cards/cards_base.dart';
+import 'package:cupon_take/shared/widgets/user_info_chip.dart';
 import 'package:flutter/material.dart';
 
-class TopRightCard extends CardBase {
+class BottomRightCard extends CardBase {
   UserInfo userInfo;
 
-  TopRightCard(this.userInfo, {super.key, required super.cardTitle});
+  BottomRightCard(this.userInfo, {super.key, required super.cardTitle});
 
   @override
   Widget? headerActions(BuildContext context) {
