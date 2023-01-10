@@ -13,15 +13,6 @@ class TopRightCard extends CardBase {
     return Row(
       children: [
         UserInfoChip(userInfo),
-        PopupMenuButton(
-          tooltip: "Conta",
-          itemBuilder: (context) {
-            return [
-              PopupMenuItem(child: Text("Entrar")),
-              PopupMenuItem(child: Text("Sair"))
-            ];
-          },
-        ),
       ],
     );
   }

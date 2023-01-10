@@ -6,8 +6,8 @@ class AppThemeData {
     brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.dark,
-      primarySwatch: Colors.deepPurple,
-      primaryColorDark: Colors.purple,
+      primarySwatch: Colors.green,
+      primaryColorDark: Colors.blue,
     ),
   );
 }

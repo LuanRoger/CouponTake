@@ -6,12 +6,15 @@ class UserInfoChip extends StatelessWidget {
 
   UserInfoChip(this.userInfo, {super.key});
 
+  String get _getUsernameAndPoints =>
+      "${userInfo.username} • ${userInfo.points}";
+
   @override
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.all(8.0),
       label: Text(
-        userInfo.username,
+        _getUsernameAndPoints,
         maxLines: 1,
         overflow: TextOverflow.fade,
       ),
