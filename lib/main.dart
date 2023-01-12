@@ -8,14 +8,14 @@ void main() {
   runApp(
     MaterialApp(
         builder: (context, child) => ResponsiveWrapper.builder(child,
-                minWidth: 400,
+                minWidth: 375,
                 defaultScale: true,
                 breakpoints: const [
-                  ResponsiveBreakpoint.resize(350,
+                  ResponsiveBreakpoint.autoScale(375,
                       name: ResponsiveBreakpointsName.mobileBreakpoint),
-                  ResponsiveBreakpoint.autoScale(850,
+                  ResponsiveBreakpoint.resize(600,
                       name: ResponsiveBreakpointsName.tabletBreakpoint),
-                  ResponsiveBreakpoint.resize(1024,
+                  ResponsiveBreakpoint.resize(1200,
                       name: ResponsiveBreakpointsName.desktopBreakpoint)
                 ]),
         theme: AppThemeData.appDarkTheme,

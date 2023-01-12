@@ -7,38 +7,43 @@ class HistorySection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todayFilterState = useState(false);
+    final selectedFilterSegmentState = useState(<String>{});
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          flex: 1,
-          child: Text(
-            "Histórico",
-            style: Theme.of(context).textTheme.headline1,
-          ),
-        ),
-        const Spacer(),
-        Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ChoiceChip(
-                    selected: todayFilterState.value,
-                    onSelected: (newValue) => todayFilterState.value = newValue,
-                    label: Text("Hoje"))
-              ],
-            )),
-        Expanded(
-          flex: 7,
-          child: Card(
-              elevation: 0,
-              color: Theme.of(context).colorScheme.surfaceVariant,
-              child: CuponHistoryList(List.empty())),
-        )
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Histórico"),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SegmentedButton(
+                    segments: const [
+                      ButtonSegment(label: Text("Otem"), value: "Ontem"),
+                      ButtonSegment(label: Text("Hoje"), value: "Hoje"),
+                      ButtonSegment(label: Text("Amanhã"), value: "Amanhã")
+                    ],
+                    selected: selectedFilterSegmentState.value,
+                    onSelectionChanged: (newValue) {
+                      selectedFilterSegmentState.value = newValue;
+                    },
+                    emptySelectionAllowed: true,
+                  )
+                ],
+              )),
+          Expanded(
+            flex: 7,
+            child: Card(
+                elevation: 0,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                child: CuponHistoryList(List.empty())),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:cupon_take/shared/widgets/card_title.dart';
 import 'package:flutter/material.dart';
 
 abstract class CardBase extends StatelessWidget {
@@ -10,7 +9,13 @@ abstract class CardBase extends StatelessWidget {
   Widget virtualBuild(BuildContext context);
 
   List<Widget> _buildHeader(BuildContext context) {
-    List<Widget> headerWidgets = [CardTitle(cardTitle)];
+    List<Widget> headerWidgets = [
+      Text(
+        cardTitle,
+        style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+            fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
+      )
+    ];
     Widget? actions = headerActions(context);
 
     if (actions != null) {

@@ -4,10 +4,6 @@ class AppThemeData {
   static final appDarkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    colorScheme: ColorScheme.fromSwatch(
-      brightness: Brightness.dark,
-      primarySwatch: Colors.green,
-      primaryColorDark: Colors.blue,
-    ),
+    colorSchemeSeed: Colors.green,
   );
 }

@@ -19,7 +19,7 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int initialPageIndex = 2;
+    const int initialPageIndex = 0;
     final selectedRailIndexState = useState(initialPageIndex);
     final mainContentState =
         useState<Widget>(_changeDestination(initialPageIndex));
