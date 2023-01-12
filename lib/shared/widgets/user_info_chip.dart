@@ -6,19 +6,14 @@ class UserInfoChip extends StatelessWidget {
 
   UserInfoChip(this.userInfo, {super.key});
 
-  String get _getUsernameAndPoints =>
-      "${userInfo.username} • ${userInfo.points}";
-
   @override
   Widget build(BuildContext context) {
     return Chip(
-      padding: const EdgeInsets.all(8.0),
       label: Text(
-        _getUsernameAndPoints,
+        userInfo.username,
         maxLines: 1,
         overflow: TextOverflow.fade,
       ),
-      avatar: const Icon(Icons.account_circle),
     );
   }
 }

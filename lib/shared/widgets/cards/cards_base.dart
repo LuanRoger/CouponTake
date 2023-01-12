@@ -29,11 +29,14 @@ abstract class CardBase extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: _buildHeader(context),
+              Flexible(
+                flex: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: _buildHeader(context),
+                ),
               ),
-              virtualBuild(context)
+              Expanded(flex: 1, child: virtualBuild(context))
             ],
           )),
     );

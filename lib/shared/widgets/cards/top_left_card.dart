@@ -15,6 +15,23 @@ class TopLeftCard extends CardBase {
 
   @override
   Widget virtualBuild(BuildContext context) {
-    return Text("Body");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Flexible(
+            flex: 0,
+            child: Chip(
+                avatar: Icon(Icons.attach_money_rounded), label: Text("100"))),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: FloatingActionButton.extended(
+                icon: Icon(Icons.add_rounded),
+                label: Text("Adicionar pontos"),
+                onPressed: () {}),
+          ),
+        ),
+      ],
+    );
   }
 }
