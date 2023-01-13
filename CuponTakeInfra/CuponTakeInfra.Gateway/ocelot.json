@@ -10,7 +10,7 @@
   "Routes": [{
     "UpstreamPathTemplate": "/auth/login",
     "DownstreamPathTemplate": "/login",
-    "UpstreamMethods": ["Get"],
+    "UpstreamMethods": ["Post"],
     "DownstreamScheme": "http",
     "DownstreamHostAndPorts": [{
       "Host": "localhost",
@@ -38,8 +38,8 @@
       }]
     },
     {
-      "UpstreamPathTemplate": "/cupon/reedem",
-      "DownstreamPathTemplate": "/reedem",
+      "UpstreamPathTemplate": "/cupon/redeem",
+      "DownstreamPathTemplate": "/redeem",
       "UpstreamMethods": ["Get"],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [{

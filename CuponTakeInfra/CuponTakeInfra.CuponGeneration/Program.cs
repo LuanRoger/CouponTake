@@ -76,7 +76,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapGet("/reedem", async (HttpContext context, 
+app.MapGet("/redeem", async (HttpContext context, 
     [FromServices] ICuponGeneratorController cuponGeneratorController) =>
 {
     Claim userRequestId = context.User.Claims.First(claim => claim.Type == "ID");

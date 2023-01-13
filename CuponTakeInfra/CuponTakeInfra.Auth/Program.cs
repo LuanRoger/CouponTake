@@ -114,7 +114,7 @@ app.MapPost("/register", async ([FromBody] UserRegisterBody user, [FromServices]
     
     return Results.Ok(token);
 });
-app.MapGet("/login", async ([FromBody] UserLoginBody user, 
+app.MapPost("/login", async ([FromBody] UserLoginBody user, 
     [FromServices] ILoginController loginController) =>
 {
     string? jwtResult = await loginController.AuthenticateUser(user);
