@@ -1,5 +1,5 @@
 name: cupon_take
-description: Reedem random codes using the CuponTake API.
+description: Redeem random codes using the CuponTake API.
 publish_to: 'none'
 version: 1.0.0
 
@@ -14,6 +14,8 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   hooks_riverpod: ^2.1.3
   responsive_framework: ^0.2.0
+  shared_preferences: ^2.0.16
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
