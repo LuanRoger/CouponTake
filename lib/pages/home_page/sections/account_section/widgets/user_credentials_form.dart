@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 
 class UserCredentialsForm extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController? usernameTextController;
+  TextEditingController? passwordTextController;
 
-  UserCredentialsForm({super.key});
+  UserCredentialsForm(
+      {super.key, this.usernameTextController, this.passwordTextController});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +16,7 @@ class UserCredentialsForm extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              controller: usernameTextController,
               decoration: const InputDecoration(
                   labelText: "Nome de usuário", border: OutlineInputBorder()),
               validator: (value) {
@@ -25,6 +29,7 @@ class UserCredentialsForm extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             TextFormField(
+              controller: passwordTextController,
               validator: (value) {
                 if (!FormsValidators.checkNotEmptyAndLengh(value, 8)) {
                   return "A senha deve ter ao menos 8 caracteres.";

@@ -23,6 +23,12 @@ class GlobalPreferences extends ChangeNotifier {
   String? get cupontakeAuthKey => _preferences.cupontakeAuthKey;
   set cupontakeAuthKey(String? authKey) {
     _preferences.cupontakeAuthKey = authKey;
+    _preferencesHolder.setString(PreferencesKeys.authKey, authKey ?? "");
     notifyListeners();
+  }
+
+  Future clear() async {
+    _preferencesHolder.clear();
+    await init();
   }
 }

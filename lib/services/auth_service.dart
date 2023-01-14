@@ -1,34 +1,53 @@
+import 'package:cupon_take/models/enums/http_codes.dart';
 import 'package:cupon_take/models/http_response.dart';
 import 'package:cupon_take/models/user_info_http_request.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class AuthServices {
   String get _authServiceUrl => "http://localhost:5039/auth";
-  Uri get _loginUrl => Uri.parse("$_authServiceUrl/login");
-  Uri get _registerUrl => Uri.parse("$_authServiceUrl/register");
-  Uri get _userInfoUrl => Uri.parse("$_authServiceUrl/user");
+  String get _loginUrl => "$_authServiceUrl/login";
+  String get _registerUrl => "$_authServiceUrl/register";
+  String get _userInfoUrl => "$_authServiceUrl/user";
 
-  Future<HttpResponse> login(String username, String password) async {
-    final UserInfoHttpRequest userInfoRequest =
-        UserInfoHttpRequest(username, password);
-    final response = await http.post(_loginUrl, body: userInfoRequest.toJson());
+  Future<HttpResponse> login(UserInfoHttpRequest userInfoRequest) async {
+    try {
+      final response = await Dio().post(_loginUrl, data: {
+        "username": userInfoRequest.username,
+        "password": userInfoRequest.password
+      });
 
-    return HttpResponse(statusCode: response.statusCode, body: response.body);
+      return HttpResponse(
+          statusCode: response.statusCode!, body: response.data);
+    } catch (_) {
+      return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
+    }
   }
 
-  Future<HttpResponse> register(String username, String password) async {
-    final UserInfoHttpRequest userInfoRequest =
-        UserInfoHttpRequest(username, password);
-    final response =
-        await http.post(_registerUrl, body: userInfoRequest.toJson());
+  Future<HttpResponse> register(UserInfoHttpRequest userInfoRequest) async {
+    try {
+      final response = await Dio().post(_registerUrl, data: {
+        "username": userInfoRequest.username,
+        "password": userInfoRequest.password
+      });
 
-    return HttpResponse(statusCode: response.statusCode, body: response.body);
+      return HttpResponse(
+          statusCode: response.statusCode!, body: response.data);
+    } catch (_) {
+      return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
+    }
   }
 
   Future<HttpResponse> getUserInfo(String authToken) async {
-    final response = await http
-        .get(_userInfoUrl, headers: {"Authorization": "Bearer $authToken"});
+    final dioClient = Dio();
+    dioClient.options.headers["Authorization"] = "Bearer $authToken";
 
-    return HttpResponse(statusCode: response.statusCode, body: response.body);
+    try {
+      final response = await dioClient.get(_userInfoUrl);
+
+      return HttpResponse(
+          statusCode: response.statusCode!, body: response.data);
+    } catch (_) {
+      return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cupon_take/providers/interfaces/cookies_authority_state.dart';
 import 'package:cupon_take/providers/providers.dart';
+import 'package:cupon_take/routes/app_routes.dart';
 import 'package:cupon_take/routes/route_driver.dart';
 import 'package:cupon_take/shared/app_theme_data.dart';
 import 'package:cupon_take/shared/preferences/global_preferences.dart';
@@ -30,18 +31,21 @@ void main() async {
 
   runApp(
     MaterialApp(
-        builder: (context, child) => ResponsiveWrapper.builder(child,
-                minWidth: 375,
-                defaultScale: true,
-                breakpoints: const [
-                  ResponsiveBreakpoint.autoScale(375,
-                      name: ResponsiveBreakpointsName.mobileBreakpoint),
-                  ResponsiveBreakpoint.resize(600,
-                      name: ResponsiveBreakpointsName.tabletBreakpoint),
-                  ResponsiveBreakpoint.resize(1200,
-                      name: ResponsiveBreakpointsName.desktopBreakpoint)
-                ]),
+        builder: (_, child) => ProviderScope(
+              child: ResponsiveWrapper.builder(child,
+                  minWidth: 375,
+                  defaultScale: true,
+                  breakpoints: const [
+                    ResponsiveBreakpoint.autoScale(375,
+                        name: ResponsiveBreakpointsName.mobileBreakpoint),
+                    ResponsiveBreakpoint.resize(600,
+                        name: ResponsiveBreakpointsName.tabletBreakpoint),
+                    ResponsiveBreakpoint.resize(1200,
+                        name: ResponsiveBreakpointsName.desktopBreakpoint)
+                  ]),
+            ),
         theme: AppThemeData.appDarkTheme,
+        initialRoute: AppRoutes.homePage,
         onGenerateRoute: RouteDriver.drive),
   );
 }

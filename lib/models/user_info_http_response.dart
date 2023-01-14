@@ -1,6 +1,6 @@
 class UserInfoHttpResponse {
   int statusCode;
-  String? jsonBody;
+  Map<String, String>? jsonData;
 
-  UserInfoHttpResponse(this.statusCode, {required this.jsonBody});
+  UserInfoHttpResponse(this.statusCode, {required this.jsonData});
 }
