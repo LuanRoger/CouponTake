@@ -39,6 +39,9 @@ class UserCredentialsForm extends StatelessWidget {
               },
               decoration: const InputDecoration(
                   labelText: "Senha", border: OutlineInputBorder()),
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
             )
           ],
         ));

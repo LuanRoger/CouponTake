@@ -1,6 +1,6 @@
 class HttpResponse {
   int statusCode;
-  String body;
+  dynamic body;
 
   HttpResponse({required this.statusCode, required this.body});
 }

@@ -131,6 +131,11 @@ class _UserInfoViwer extends HookConsumerWidget {
 
   const _UserInfoViwer(this.username, {super.key});
 
+  void _logout(WidgetRef ref) {
+    ref.read(userAuthProvider.notifier).logout();
+    ref.read(preferencesProvider).cupontakeAuthKey = null;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
@@ -139,10 +144,7 @@ class _UserInfoViwer extends HookConsumerWidget {
         ElevatedButton.icon(
             label: Text("Sair"),
             icon: const Icon(Icons.exit_to_app_rounded),
-            onPressed: () {
-              ref.read(userAuthProvider.notifier).logout();
-              ref.read(preferencesProvider).cupontakeAuthKey = null;
-            }),
+            onPressed: () => _logout(ref)),
       ]),
     );
   }

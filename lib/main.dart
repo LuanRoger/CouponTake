@@ -1,4 +1,3 @@
-import 'package:cupon_take/providers/interfaces/cookies_authority_state.dart';
 import 'package:cupon_take/providers/providers.dart';
 import 'package:cupon_take/routes/app_routes.dart';
 import 'package:cupon_take/routes/route_driver.dart';
@@ -9,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'models/cookies_authority.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -19,15 +16,6 @@ void main() async {
 
   preferencesProvider =
       ChangeNotifierProvider<GlobalPreferences>((_) => globalPreferences);
-
-  cookiesAuthorityProvider =
-      StateNotifierProvider<CookiesAuthorityState, CookiesAuthority>((ref) {
-    final preferences = ref.watch(preferencesProvider);
-
-    return CookiesAuthorityState(
-        cookiesAuthority:
-            CookiesAuthority(jwtAuthToken: preferences.cupontakeAuthKey));
-  });
 
   runApp(
     MaterialApp(
