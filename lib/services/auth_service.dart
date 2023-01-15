@@ -9,15 +9,16 @@ class AuthServices {
   String get _registerUrl => "$_authServiceUrl/register";
   String get _userInfoUrl => "$_authServiceUrl/user";
 
-  Future<HttpResponse> login(UserInfoHttpRequest userInfoRequest) async {
-    Dio client = Dio();
-    client.options.headers["Content-Type"] = "application/json";
-    client.options.headers["Access-Control-Allow-Origin"] = "*";
-    client.options.headers["Access-Control-Allow-Methods"] = "POST";
+  final Dio dioClient = Dio();
 
+  AuthServices() {
+    dioClient.options.headers["Content-Type"] = "application/json";
+  }
+
+  Future<HttpResponse> login(UserInfoHttpRequest userInfoRequest) async {
     try {
       final body = userInfoRequest.toJson();
-      final response = await Dio().post(_loginUrl, data: body);
+      final response = await dioClient.post(_loginUrl, data: body);
 
       return HttpResponse(
           statusCode: response.statusCode!, body: response.data);
@@ -27,14 +28,14 @@ class AuthServices {
     } catch (e) {
       return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
     } finally {
-      client.close();
+      dioClient.close();
     }
   }
 
   Future<HttpResponse> register(UserInfoHttpRequest userInfoRequest) async {
     try {
       final body = userInfoRequest.toJson();
-      final response = await Dio().post(_registerUrl, data: body);
+      final response = await dioClient.post(_registerUrl, data: body);
 
       return HttpResponse(
           statusCode: response.statusCode!, body: response.data);
@@ -47,11 +48,12 @@ class AuthServices {
   }
 
   Future<HttpResponse> getUserInfo(String authToken) async {
-    final dioClient = Dio();
-    dioClient.options.headers["Authorization"] = "Bearer $authToken";
+    Dio clientWAuth = Dio();
+    clientWAuth.options.headers = Map.from(dioClient.options.headers);
+    clientWAuth.options.headers["Authorization"] = "Bearer $authToken";
 
     try {
-      final response = await dioClient.get(_userInfoUrl,
+      final response = await clientWAuth.get(_userInfoUrl,
           options: Options(responseType: ResponseType.json));
 
       return HttpResponse(
@@ -59,7 +61,7 @@ class AuthServices {
     } catch (_) {
       return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
     } finally {
-      dioClient.close();
+      clientWAuth.close();
     }
   }
 }

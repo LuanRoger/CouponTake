@@ -56,10 +56,11 @@ class _UserCredentialsForm extends HookConsumerWidget {
     final isLoading = useState(false);
     final usernameTextControllerState = useTextEditingController();
     final passwordTextControllerState = useTextEditingController();
-    final UserCredentialsForm credentialsForm = UserCredentialsForm(
-      usernameTextController: usernameTextControllerState,
-      passwordTextController: passwordTextControllerState,
-    );
+    final UserCredentialsForm credentialsForm =
+        useMemoized(() => UserCredentialsForm(
+              usernameTextController: usernameTextControllerState,
+              passwordTextController: passwordTextControllerState,
+            ));
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -108,12 +109,9 @@ class _UserCredentialsForm extends HookConsumerWidget {
                                     usernameTextControllerState.text,
                                     passwordTextControllerState.text));
                             if (!success) {
-                              if (!success) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text("Credenciais incorretas")));
-                              }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text("Credenciais incorretas")));
                             }
                           }
                           isLoading.value = false;
