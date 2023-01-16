@@ -1,11 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class RedeemHistoryHttpRequest extends Equatable {
-  int page;
-  int limitPerPage;
+part 'redeem_history_http_request.freezed.dart';
 
-  RedeemHistoryHttpRequest({required this.page, this.limitPerPage = 10});
-
-  @override
-  List<Object?> get props => [page, limitPerPage];
+@freezed
+class RedeemHistoryHttpRequest with _$RedeemHistoryHttpRequest {
+  const factory RedeemHistoryHttpRequest(
+      {required int page,
+      @Default(10) int limitPerPage}) = _RedeemHistoryHttpRequest;
 }
