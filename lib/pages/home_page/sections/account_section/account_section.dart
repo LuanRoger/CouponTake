@@ -53,7 +53,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
+    final isLoadingState = useState(false);
     final usernameTextControllerState = useTextEditingController();
     final passwordTextControllerState = useTextEditingController();
     final UserCredentialsForm credentialsForm =
@@ -64,7 +64,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: isLoading.value
+      child: isLoadingState.value
           ? const Center(
               child: CircularProgressIndicator(),
             )
@@ -81,7 +81,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
                     ElevatedButton(
                         child: Text("Entrar"),
                         onPressed: () async {
-                          isLoading.value = true;
+                          isLoadingState.value = true;
                           if (credentialsForm.formKey.currentState!
                               .validate()) {
                             bool success = await _login(
@@ -95,12 +95,12 @@ class _UserCredentialsForm extends HookConsumerWidget {
                                       content: Text("Credenciais incorretas")));
                             }
                           }
-                          isLoading.value = false;
+                          isLoadingState.value = false;
                         }),
                     ElevatedButton(
                         child: Text("Cadastrar"),
                         onPressed: () async {
-                          isLoading.value = true;
+                          isLoadingState.value = true;
                           if (credentialsForm.formKey.currentState!
                               .validate()) {
                             bool success = await _register(
@@ -114,7 +114,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
                                       content: Text("Credenciais incorretas")));
                             }
                           }
-                          isLoading.value = false;
+                          isLoadingState.value = false;
                         })
                   ],
                 )

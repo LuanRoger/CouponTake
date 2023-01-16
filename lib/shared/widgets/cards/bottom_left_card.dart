@@ -6,7 +6,6 @@ import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
 import 'package:cupon_take/shared/widgets/cards/cards_base.dart';
 import 'package:cupon_take/shared/widgets/dynamic_ex_fab.dart';
 import 'package:cupon_take/shared/widgets/last_redeem_info_card.dart';
-import 'package:cupon_take/shared/widgets/material_card.dart';
 import 'package:cupon_take/shared/widgets/no_account_message.dart';
 import 'package:cupon_take/shared/widgets/user_info_chip.dart';
 import 'package:flutter/material.dart';
@@ -22,18 +21,20 @@ class BottomLeftCard extends CardBase {
   @override
   Widget? headerActions(BuildContext context) => null;
 
-  Future<bool> _redeemCupon(String authKey) async {
+  Future<String?> _redeemCupon(String authKey) async {
     CuponServices cuponServices = CuponServices();
     final response = await cuponServices.redeemCupon(authKey);
+    if (response.statusCode != HttpCodes.SUCCESS.code) return null;
 
-    return response.statusCode == HttpCodes.SUCCESS.code;
+    return response.body as String;
   }
 
   @override
   Widget virtualBuild(BuildContext context, WidgetRef ref) {
     final authKey = ref.read(userAuthProvider);
     final userInfo = ref.watch(fetchUserInfoProvider);
-    final isLoading = useState(false);
+    final isLoadingState = useState(false);
+    final lastCuponRedeemState = useState<String?>(null);
 
     return userInfo.maybeWhen(
         data: (info) => Column(
@@ -47,7 +48,8 @@ class BottomLeftCard extends CardBase {
                     children: [
                       if (ResponsiveWrapper.of(context).activeBreakpoint.name ==
                           ResponsiveBreakpointsName.desktopBreakpoint)
-                        const LastRedeemInfoCard(),
+                        LastRedeemInfoCard(
+                            cuponCode: lastCuponRedeemState.value),
                       UsernameInfoChip(info),
                     ],
                   ),
@@ -58,19 +60,22 @@ class BottomLeftCard extends CardBase {
                       child: DynamicExFab(
                     icon: Icons.api_rounded,
                     label: const Text("Requisitar código"),
-                    enabled: !isLoading.value,
+                    enabled: !isLoadingState.value,
                     onPressed: () async {
-                      isLoading.value = true;
-                      bool success = await _redeemCupon(authKey!);
-                      if (success) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Código resgatado com sucesso")));
+                      isLoadingState.value = true;
+                      String? code = await _redeemCupon(authKey!);
+                      if (code != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Código resgatado com sucesso")));
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text("Não foi possivel resgatar o código")));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "Não foi possivel resgatar o código")));
                       }
-                      isLoading.value = false;
+                      lastCuponRedeemState.value = code;
+                      isLoadingState.value = false;
                     },
                   )),
                 )

@@ -31,7 +31,7 @@ class TopLeftCard extends CardBase {
   Widget virtualBuild(BuildContext context, WidgetRef ref) {
     final authKey = ref.read(userAuthProvider);
     final userInfo = ref.watch(fetchUserInfoProvider);
-    final isLoading = useState(false);
+    final isLoadingState = useState(false);
 
     return userInfo.maybeWhen(
       data: (info) => Column(
@@ -48,9 +48,9 @@ class TopLeftCard extends CardBase {
                 child: DynamicExFab(
                     icon: Icons.add_rounded,
                     label: const Text("Adicionar pontos"),
-                    enabled: !isLoading.value,
+                    enabled: !isLoadingState.value,
                     onPressed: () async {
-                      isLoading.value = true;
+                      isLoadingState.value = true;
                       bool success = await _requestPoints(authKey!);
                       if (success) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -62,7 +62,7 @@ class TopLeftCard extends CardBase {
                                 content: Text(
                                     "Não foi possivel resgatar os pontos")));
                       }
-                      isLoading.value = false;
+                      isLoadingState.value = false;
                     })),
           ),
         ],

@@ -11,6 +11,6 @@ class RightCard extends CardBase {
 
   @override
   Widget virtualBuild(BuildContext context, WidgetRef ref) {
-    return CuponHistoryList(List.empty());
+    return CuponHistoryList();
   }
 }

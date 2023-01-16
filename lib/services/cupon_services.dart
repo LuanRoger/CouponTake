@@ -32,16 +32,23 @@ class CuponServices {
   }
 
   Future<HttpResponse> getRedeemHistory(
-      RedeemHistoryHttpRequest historyRequest) async {
+      String authToken, RedeemHistoryHttpRequest historyRequest) async {
+    Dio clientWAuth = Dio();
+    clientWAuth.options.headers = Map.from(dioClient.options.headers);
+    clientWAuth.options.headers["Authorization"] = "Bearer $authToken";
+
     try {
-      final response = await dioClient.get(_redeemHistoryUrl);
+      final int limit = historyRequest.limitPerPage;
+      final int page = historyRequest.page;
+      final response =
+          await clientWAuth.get("$_redeemHistoryUrl?limit=$limit&page=$page");
 
       return HttpResponse(
           statusCode: response.statusCode!, body: response.data);
     } catch (_) {
       return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
     } finally {
-      dioClient.close();
+      clientWAuth.close();
     }
   }
 }

@@ -1,8 +1,11 @@
-class RedeemHistoryHttpRequest {
-  String authKey;
+import 'package:equatable/equatable.dart';
+
+class RedeemHistoryHttpRequest extends Equatable {
   int page;
   int limitPerPage;
 
-  RedeemHistoryHttpRequest(this.authKey,
-      {required this.page, this.limitPerPage = 5});
+  RedeemHistoryHttpRequest({required this.page, this.limitPerPage = 10});
+
+  @override
+  List<Object?> get props => [page, limitPerPage];
 }
