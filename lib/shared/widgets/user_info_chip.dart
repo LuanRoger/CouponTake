@@ -1,10 +1,10 @@
 import 'package:cupon_take/models/user_info.dart';
 import 'package:flutter/material.dart';
 
-class UserInfoChip extends StatelessWidget {
+class UsernameInfoChip extends StatelessWidget {
   UserInfo userInfo;
 
-  UserInfoChip(this.userInfo, {super.key});
+  UsernameInfoChip(this.userInfo, {super.key});
 
   @override
   Widget build(BuildContext context) {

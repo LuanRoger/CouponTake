@@ -40,7 +40,7 @@ class HistorySection extends HookWidget {
             child: Card(
                 elevation: 0,
                 color: Theme.of(context).colorScheme.surfaceVariant,
-                child: CuponHistoryList(List.empty())),
+                child: CuponHistoryList()),
           )
         ],
       ),
