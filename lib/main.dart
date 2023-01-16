@@ -39,8 +39,9 @@ class MainApp extends HookConsumerWidget {
                   ResponsiveBreakpoint.resize(1200,
                       name: ResponsiveBreakpointsName.desktopBreakpoint)
                 ]),
-        theme: AppThemeData.getBrightness(
-            AppBrightness.values[themePreferences.brightness]),
+        theme: AppThemeData.getAppTheme(
+            AppBrightness.values[themePreferences.brightness],
+            themePreferences.colorIndex),
         initialRoute: AppRoutes.homePage,
         onGenerateRoute: RouteDriver.drive);
   }

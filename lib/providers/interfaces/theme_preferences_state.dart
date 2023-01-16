@@ -7,6 +7,10 @@ class ThemePreferencesState extends StateNotifier<ThemePreferences> {
       : super(themePreferences ??
             const ThemePreferences(brightness: 0, colorIndex: 0));
 
+  AppBrightness get brightness =>
+      state.brightness == 0 ? AppBrightness.LIGHT : AppBrightness.DARK;
+  int get colorIndex => state.colorIndex;
+
   void changeBrightness(AppBrightness brightness) {
     state = state.copyWith(brightness: brightness.index);
   }

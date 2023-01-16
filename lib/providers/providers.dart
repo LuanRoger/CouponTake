@@ -27,8 +27,10 @@ final themePreferencesProvider =
   final preferences = ref.watch(preferencesProvider
       .select((value) => value.preferences.themePreferences));
 
-  return ThemePreferencesState(ThemePreferences(
-      brightness: preferences.brightness, colorIndex: preferences.colorIndex));
+  return ThemePreferencesState(
+    ThemePreferences(
+        brightness: preferences.brightness, colorIndex: preferences.colorIndex),
+  );
 });
 
 final fetchUserInfoProvider = FutureProvider<UserInfo>((ref) async {

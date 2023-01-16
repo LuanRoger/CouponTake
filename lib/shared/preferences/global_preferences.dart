@@ -54,7 +54,7 @@ class GlobalPreferences extends ChangeNotifier {
     preferences.themePreferences =
         preferences.themePreferences.copyWith(colorIndex: colorIndexAsserted);
     _preferencesHolder.setInt(
-        PreferencesKeys.brightnessTheme, colorIndexAsserted);
+        PreferencesKeys.themeColor, colorIndexAsserted);
     notifyListeners();
   }
 
