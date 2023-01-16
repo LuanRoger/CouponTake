@@ -1,4 +1,5 @@
 import 'package:cupon_take/pages/home_page/sections/account_section/account_section.dart';
+import 'package:cupon_take/pages/home_page/sections/configurations_section.dart';
 import 'package:cupon_take/pages/home_page/sections/history_section.dart';
 import 'package:cupon_take/pages/home_page/sections/home_section.dart';
 import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
@@ -10,19 +11,21 @@ class HomePage extends HookWidget {
   Widget _changeDestination(int index) {
     switch (index) {
       case 0:
-        return HomeSection();
+        return const HomeSection();
       case 1:
         return AccountSection();
       case 2:
-        return HistorySection();
+        return const HistorySection();
+      case 3:
+        return const ConfigurationSection();
       default:
-        return HomeSection();
+        return const HomeSection();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    const int initialPageIndex = 0;
+    const int initialPageIndex = 2;
     final selectedRailIndexState = useState(initialPageIndex);
     final mainContentState =
         useState<Widget>(_changeDestination(initialPageIndex));
@@ -53,6 +56,10 @@ class HomePage extends HookWidget {
                   NavigationRailDestination(
                     icon: Icon(Icons.history_rounded),
                     label: Text("Histórico"),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.settings_rounded),
+                    label: Text("Configurações"),
                   ),
                 ],
                 onDestinationSelected: (newIndex) {
@@ -97,6 +104,10 @@ class HomePage extends HookWidget {
                       icon: Icon(Icons.history_rounded),
                       label: "Histórico",
                     ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.settings_rounded),
+                      label: "Configurações",
+                    )
                   ],
                   onTap: (newIndex) {
                     mainContentState.value = _changeDestination(newIndex);
