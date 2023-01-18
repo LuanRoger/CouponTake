@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   GlobalPreferences globalPreferences = GlobalPreferences();
-  globalPreferences.init();
+  await globalPreferences.init();
 
   preferencesProvider =
       ChangeNotifierProvider<GlobalPreferences>((_) => globalPreferences);

@@ -53,8 +53,7 @@ final fetchUserInfoProvider = FutureProvider<UserInfo>((ref) async {
 final fetchUserRedeemHistoryProvider =
     FutureProvider.family<List<CuponRedeem>, RedeemHistoryHttpRequest>(
         (ref, requestInfo) async {
-  final userInfo = ref.watch(fetchUserInfoProvider);
-  final userAuthKey = ref.read(userAuthProvider);
+  final userAuthKey = ref.watch(userAuthProvider);
 
   if (userAuthKey == null || userAuthKey.isEmpty) {
     throw Exception("There is no Auth Key");
@@ -79,6 +78,7 @@ final fetchUserRedeemHistoryProvider =
       ),
     );
   }
+  if (history.isEmpty) throw Exception("There is no record in the list.");
 
   return history;
 });

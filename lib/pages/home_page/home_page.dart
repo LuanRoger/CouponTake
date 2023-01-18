@@ -15,7 +15,7 @@ class HomePage extends HookWidget {
       case 1:
         return AccountSection();
       case 2:
-        return const HistorySection();
+        return HistorySection();
       case 3:
         return const ConfigurationSection();
       default:
@@ -25,7 +25,7 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int initialPageIndex = 2;
+    const int initialPageIndex = 0;
     final selectedRailIndexState = useState(initialPageIndex);
     final mainContentState =
         useState<Widget>(_changeDestination(initialPageIndex));
@@ -84,32 +84,32 @@ class HomePage extends HookWidget {
           ],
         ),
       ),
-      bottomNavigationBar: ResponsiveValue<BottomNavigationBar?>(context,
+      bottomNavigationBar: ResponsiveValue<NavigationBar?>(context,
           defaultValue: null,
           valueWhen: [
             Condition.equals(
                 name: ResponsiveBreakpointsName.mobileBreakpoint,
-                value: BottomNavigationBar(
-                  currentIndex: selectedRailIndexState.value,
-                  items: const [
-                    BottomNavigationBarItem(
+                value: NavigationBar(
+                  selectedIndex: selectedRailIndexState.value,
+                  destinations: const [
+                    NavigationDestination(
                       icon: Icon(Icons.home_rounded),
                       label: "Inicío",
                     ),
-                    BottomNavigationBarItem(
+                    NavigationDestination(
                       icon: Icon(Icons.account_circle_rounded),
                       label: "Conta",
                     ),
-                    BottomNavigationBarItem(
+                    NavigationDestination(
                       icon: Icon(Icons.history_rounded),
                       label: "Histórico",
                     ),
-                    BottomNavigationBarItem(
+                    NavigationDestination(
                       icon: Icon(Icons.settings_rounded),
                       label: "Configurações",
                     )
                   ],
-                  onTap: (newIndex) {
+                  onDestinationSelected: (newIndex) {
                     mainContentState.value = _changeDestination(newIndex);
                     selectedRailIndexState.value = newIndex;
                   },
