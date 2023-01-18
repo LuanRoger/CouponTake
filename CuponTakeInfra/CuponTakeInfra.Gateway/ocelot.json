@@ -13,8 +13,8 @@
     "UpstreamMethods": ["Post"],
     "DownstreamScheme": "http",
     "DownstreamHostAndPorts": [{
-      "Host": "localhost",
-      "Port": 5039
+      "Host": "cupontake-auth",
+      "Port": 80
     }]
   },
     {
@@ -23,8 +23,8 @@
       "UpstreamMethods": ["Post"],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [{
-        "Host": "localhost",
-        "Port": 5039
+        "Host": "cupontake-auth",
+        "Port": 80
       }]
     },
     {
@@ -33,8 +33,8 @@
       "UpstreamHttpMethod": ["Get"],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [{
-        "Host": "localhost",
-        "Port": 5039
+        "Host": "cupontake-auth",
+        "Port": 80
       }]
     },
     {
@@ -43,8 +43,8 @@
       "UpstreamMethods": ["Get"],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [{
-        "Host": "localhost",
-        "Port": 7125
+        "Host": "cupontake-cupon-generator",
+        "Port": 80
       }]
     },
     {
@@ -53,8 +53,8 @@
       "UpstreamHttpMethod": ["Post"],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [{
-        "Host": "localhost",
-        "Port": 7125
+        "Host": "cupontake-cupon-generator",
+        "Port": 80
       }]
     },
     {
@@ -63,8 +63,8 @@
       "UpstreamHttpMethod": ["Get"],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [{
-        "Host": "localhost",
-        "Port": 7125
+        "Host": "cupontake-cupon-generator",
+        "Port": 80
       }]
     }
   ]
