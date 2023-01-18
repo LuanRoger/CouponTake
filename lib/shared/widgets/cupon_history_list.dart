@@ -1,26 +1,60 @@
 import 'package:cupon_take/models/redeem_history_http_request.dart';
 import 'package:cupon_take/providers/providers.dart';
+import 'package:cupon_take/shared/widgets/controllers/cupon_history_list_controller.dart';
+import 'package:cupon_take/shared/widgets/controllers/cupon_history_list_state.dart';
 import 'package:cupon_take/shared/widgets/cupon_history_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CuponHistoryList extends HookConsumerWidget {
-  CuponHistoryList({super.key});
+class CuponHistoryList extends ConsumerStatefulWidget {
+  final CuponHistoryListController? controller;
+
+  const CuponHistoryList({super.key, this.controller});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final pageState = useState(1);
+  ConsumerState<CuponHistoryList> createState() => _CuponHistoryListState();
+}
+
+class _CuponHistoryListState extends ConsumerState<CuponHistoryList> {
+  late final CuponHistoryListState state;
+
+  @override
+  void initState() {
+    super.initState();
+    state = CuponHistoryListState(page: 1);
+    if (widget.controller != null) {
+      widget.controller!.state = state;
+      widget.controller!.addListener(() {
+        setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller?.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final redeemHistory = ref.watch(fetchUserRedeemHistoryProvider(
-      RedeemHistoryHttpRequest(page: pageState.value),
+      RedeemHistoryHttpRequest(page: state.page),
     ));
 
     return redeemHistory.maybeWhen(
-        data: (info) => ListView.separated(
-            itemCount: info.length,
-            shrinkWrap: true,
-            itemBuilder: (_, index) => CuponHistoryTile(info[index].cupon),
-            separatorBuilder: (_, index) => const Divider()),
+        data: (info) => RefreshIndicator(
+              onRefresh: () {
+                widget.controller?.reset();
+                return Future.value();
+              },
+              child: ListView.separated(
+                  itemCount: info.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) =>
+                      CuponHistoryTile(info[index].cupon),
+                  separatorBuilder: (_, index) => const Divider()),
+            ),
         loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
@@ -28,8 +62,8 @@ class CuponHistoryList extends HookConsumerWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.history_rounded),
-                    Text("Não há histórico registrado")
+                    const Icon(Icons.history_rounded),
+                    Text("Não há histórico registrado.")
                   ]),
             ));
   }

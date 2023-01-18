@@ -1,4 +1,5 @@
 import 'package:cupon_take/pages/home_page/sections/account_section/account_section.dart';
+import 'package:cupon_take/pages/home_page/sections/configurations_section.dart';
 import 'package:cupon_take/pages/home_page/sections/history_section.dart';
 import 'package:cupon_take/pages/home_page/sections/home_section.dart';
 import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
@@ -10,13 +11,15 @@ class HomePage extends HookWidget {
   Widget _changeDestination(int index) {
     switch (index) {
       case 0:
-        return HomeSection();
+        return const HomeSection();
       case 1:
         return AccountSection();
       case 2:
         return HistorySection();
+      case 3:
+        return const ConfigurationSection();
       default:
-        return HomeSection();
+        return const HomeSection();
     }
   }
 
@@ -54,6 +57,10 @@ class HomePage extends HookWidget {
                     icon: Icon(Icons.history_rounded),
                     label: Text("Histórico"),
                   ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.settings_rounded),
+                    label: Text("Configurações"),
+                  ),
                 ],
                 onDestinationSelected: (newIndex) {
                   mainContentState.value = _changeDestination(newIndex);
@@ -77,28 +84,32 @@ class HomePage extends HookWidget {
           ],
         ),
       ),
-      bottomNavigationBar: ResponsiveValue<BottomNavigationBar?>(context,
+      bottomNavigationBar: ResponsiveValue<NavigationBar?>(context,
           defaultValue: null,
           valueWhen: [
             Condition.equals(
                 name: ResponsiveBreakpointsName.mobileBreakpoint,
-                value: BottomNavigationBar(
-                  currentIndex: selectedRailIndexState.value,
-                  items: const [
-                    BottomNavigationBarItem(
+                value: NavigationBar(
+                  selectedIndex: selectedRailIndexState.value,
+                  destinations: const [
+                    NavigationDestination(
                       icon: Icon(Icons.home_rounded),
                       label: "Inicío",
                     ),
-                    BottomNavigationBarItem(
+                    NavigationDestination(
                       icon: Icon(Icons.account_circle_rounded),
                       label: "Conta",
                     ),
-                    BottomNavigationBarItem(
+                    NavigationDestination(
                       icon: Icon(Icons.history_rounded),
                       label: "Histórico",
                     ),
+                    NavigationDestination(
+                      icon: Icon(Icons.settings_rounded),
+                      label: "Configurações",
+                    )
                   ],
-                  onTap: (newIndex) {
+                  onDestinationSelected: (newIndex) {
                     mainContentState.value = _changeDestination(newIndex);
                     selectedRailIndexState.value = newIndex;
                   },

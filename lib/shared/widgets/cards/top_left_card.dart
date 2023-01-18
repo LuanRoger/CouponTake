@@ -12,13 +12,7 @@ class TopLeftCard extends CardBase {
   TopLeftCard({super.key, required super.cardTitle});
 
   @override
-  Widget? headerActions(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.light_mode))
-      ],
-    );
-  }
+  Widget? headerActions(BuildContext context) => null;
 
   Future<bool> _requestPoints(String authKey) async {
     PointsServices pointsServices = PointsServices();

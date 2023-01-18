@@ -1,3 +1,4 @@
+import 'package:cupon_take/models/enums/app_brightness.dart';
 import 'package:cupon_take/providers/providers.dart';
 import 'package:cupon_take/routes/app_routes.dart';
 import 'package:cupon_take/routes/route_driver.dart';
@@ -12,28 +13,36 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   GlobalPreferences globalPreferences = GlobalPreferences();
-  globalPreferences.init();
+  await globalPreferences.init();
 
   preferencesProvider =
       ChangeNotifierProvider<GlobalPreferences>((_) => globalPreferences);
 
-  runApp(
-    MaterialApp(
-        builder: (_, child) => ProviderScope(
-              child: ResponsiveWrapper.builder(child,
-                  minWidth: 375,
-                  defaultScale: true,
-                  breakpoints: const [
-                    ResponsiveBreakpoint.autoScale(375,
-                        name: ResponsiveBreakpointsName.mobileBreakpoint),
-                    ResponsiveBreakpoint.resize(600,
-                        name: ResponsiveBreakpointsName.tabletBreakpoint),
-                    ResponsiveBreakpoint.resize(1200,
-                        name: ResponsiveBreakpointsName.desktopBreakpoint)
-                  ]),
-            ),
-        theme: AppThemeData.appDarkTheme,
+  runApp(const ProviderScope(child: MainApp()));
+}
+
+class MainApp extends HookConsumerWidget {
+  const MainApp({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themePreferences = ref.watch(themePreferencesProvider);
+
+    return MaterialApp(
+        builder: (_, child) => ResponsiveWrapper.builder(child,
+                minWidth: 375,
+                defaultScale: true,
+                breakpoints: const [
+                  ResponsiveBreakpoint.autoScale(375,
+                      name: ResponsiveBreakpointsName.mobileBreakpoint),
+                  ResponsiveBreakpoint.resize(600,
+                      name: ResponsiveBreakpointsName.tabletBreakpoint),
+                  ResponsiveBreakpoint.resize(1200,
+                      name: ResponsiveBreakpointsName.desktopBreakpoint)
+                ]),
+        theme: AppThemeData.getAppTheme(
+            AppBrightness.values[themePreferences.brightness],
+            themePreferences.colorIndex),
         initialRoute: AppRoutes.homePage,
-        onGenerateRoute: RouteDriver.drive),
-  );
+        onGenerateRoute: RouteDriver.drive);
+  }
 }
