@@ -1,10 +1,11 @@
 import 'package:cupon_take/models/enums/http_codes.dart';
 import 'package:cupon_take/models/http_response.dart';
 import 'package:cupon_take/models/user_info_http_request.dart';
+import 'package:cupon_take/shared/global.dart';
 import 'package:dio/dio.dart';
 
 class AuthServices {
-  String get _authServiceUrl => "http://localhost:5198/auth";
+  String get _authServiceUrl => "http://${envVars.hostAndPort}/auth";
   String get _loginUrl => "$_authServiceUrl/login";
   String get _registerUrl => "$_authServiceUrl/register";
   String get _userInfoUrl => "$_authServiceUrl/user";

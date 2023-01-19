@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using CuponTakeInfra.CuponGeneration.Controllers;
 using CuponTakeInfra.CuponGeneration.Exceptions;
+using CuponTakeInfra.CuponGeneration.Utils;
 using CuponTakeInfra.Db.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,27 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MainClusterDb>(options =>
 {
-    options.UseNpgsql(builder.Configuration
-        .GetConnectionString("PostgresUsersDbConnectionString"));
+    string connString = builder.Configuration
+        .GetConnectionString("PostgresUsersDbConnectionString")!;
+    
+    if(builder.Environment.IsProduction())
+    {
+        string? postgresMainDbUser = EnviromentUtils.GetPostgresMainDbUser();
+        string? postgresMainDbPassword = EnviromentUtils.GetPostgresMainDbPassword();
+        string postgresPort = EnviromentUtils.GetPostgresPort() ?? "5432";
+        
+        if(postgresMainDbPassword is null)
+            throw new NullEnviromentVariableException(nameof(postgresMainDbPassword), 
+                builder.Environment.EnvironmentName);
+        if(postgresMainDbUser is null)
+            throw new NullEnviromentVariableException(nameof(postgresMainDbUser), 
+                builder.Environment.EnvironmentName);
+        
+        connString = string.Format(connString, postgresMainDbUser, postgresMainDbPassword, postgresPort);
+    }
+    
+    //The Migrations is to be made on the CuponTakeInfra.Auth
+    options.UseNpgsql(connString);
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 });
 builder.Services.AddScoped<ICuponHistoryController, CuponHistoryController>(provider => 

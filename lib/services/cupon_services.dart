@@ -1,10 +1,11 @@
 import 'package:cupon_take/models/enums/http_codes.dart';
 import 'package:cupon_take/models/http_response.dart';
 import 'package:cupon_take/models/redeem_history_http_request.dart';
+import 'package:cupon_take/shared/global.dart';
 import 'package:dio/dio.dart';
 
 class CuponServices {
-  String get _cuponServicesUrl => "http://localhost:5198/cupon";
+  String get _cuponServicesUrl => "http://${envVars.hostAndPort}/cupon";
   String get _redeemUrl => "$_cuponServicesUrl/redeem";
   String get _redeemHistoryUrl => "$_cuponServicesUrl/history";
 

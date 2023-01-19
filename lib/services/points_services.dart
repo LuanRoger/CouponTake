@@ -1,9 +1,10 @@
 import 'package:cupon_take/models/enums/http_codes.dart';
 import 'package:cupon_take/models/http_response.dart';
+import 'package:cupon_take/shared/global.dart';
 import 'package:dio/dio.dart';
 
 class PointsServices {
-  String get _pointsServiceUrl => "http://localhost:5198/cupon";
+  String get _pointsServiceUrl => "http://${envVars.hostAndPort}/cupon";
   String get _pointsUrl => "$_pointsServiceUrl/points";
 
   final dioClient = Dio();

@@ -14,12 +14,19 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=root
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     networks:
       - db-acces
     volumes:
       - cupon-take-db:/var/lib/postgresql/data
+
+  cupontake-gateway:
+    image: cupontake-gateway:latest
+    ports:
+      - 5198:80
+    networks:
+      - cupontake-infra
 
   cupontake-auth:
     image: cupontake-auth:latest
@@ -30,6 +37,10 @@ services:
       - db-acces
     depends_on:
       - cupontake-db    
+    environment:
+      - POSTGRES_MAIN_DB_USER
+      - POSTGRES_MAIN_DB_PASSWORD
+      - POSTGRES_PORT
   
   cupontake-cupon-generator:
     image: cupontake-generator:latest
@@ -41,3 +52,7 @@ services:
     depends_on:
       - cupontake-auth
       - cupontake-db
+    environment:
+      - POSTGRES_MAIN_DB_USER
+      - POSTGRES_MAIN_DB_PASSWORD
+      - POSTGRES_PORT
