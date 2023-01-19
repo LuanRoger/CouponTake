@@ -4,21 +4,40 @@ using CuponTakeInfra.Auth.Controller;
 using CuponTakeInfra.Auth.Exceptions;
 using CuponTakeInfra.Auth.Models;
 using CuponTakeInfra.Auth.Services.Jwt;
+using CuponTakeInfra.Auth.Utils;
 using CuponTakeInfra.Db.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MainClusterDb>(optionsBuilder =>
 {
-    optionsBuilder.UseNpgsql(builder.Configuration
-        .GetConnectionString("PostgresUsersDbConnectionString")!, 
+    string connString = builder.Configuration
+        .GetConnectionString("PostgresUsersDbConnectionString")!;
+    
+    if(builder.Environment.IsProduction())
+    {
+        string? postgresMainDbUser = EnviromentUtils.GetPostgresMainDbUser();
+        string? postgresMainDbPassword = EnviromentUtils.GetPostgresMainDbPassword();
+        string postgresPort = EnviromentUtils.GetPostgresPort() ?? "5432";
+        
+        if(postgresMainDbPassword is null)
+            throw new NullEnviromentVariableException(nameof(postgresMainDbPassword), 
+                builder.Environment.EnvironmentName);
+        if(postgresMainDbUser is null)
+            throw new NullEnviromentVariableException(nameof(postgresMainDbUser), 
+                builder.Environment.EnvironmentName);
+        
+        connString = string.Format(connString, postgresMainDbUser, postgresMainDbPassword, postgresPort);
+    }
+    
+    optionsBuilder.UseNpgsql(connString,
         contextOptionsBuilder =>
         {
             contextOptionsBuilder.MigrationsAssembly("CuponTakeInfra.Auth");
