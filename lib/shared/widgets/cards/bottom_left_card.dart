@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously, unused_result
+
 import 'package:cupon_take/models/enums/http_codes.dart';
+import 'package:cupon_take/models/redeem_history_http_request.dart';
 import 'package:cupon_take/models/user_info.dart';
 import 'package:cupon_take/providers/providers.dart';
 import 'package:cupon_take/services/cupon_services.dart';
@@ -68,6 +71,9 @@ class BottomLeftCard extends CardBase {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text("Código resgatado com sucesso")));
+                        ref.refresh(fetchUserInfoProvider);
+                        ref.refresh(fetchUserRedeemHistoryProvider(
+                            const RedeemHistoryHttpRequest(page: 1)));
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

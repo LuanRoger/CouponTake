@@ -26,7 +26,7 @@ void main() async {
   //Enviroment initialization
   Enviroment enviroment =
       kDebugMode ? Enviroment.DEVELOPMENT : Enviroment.PRODUCTION;
-  envVars = await EnviromentConfiguration.init(enviroment, forceProd: true);
+  envVars = await EnviromentConfiguration.init(enviroment);
 
   runApp(const ProviderScope(child: MainApp()));
 }
