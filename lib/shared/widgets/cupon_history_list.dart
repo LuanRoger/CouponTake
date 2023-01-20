@@ -24,6 +24,7 @@ class _CuponHistoryListState extends ConsumerState<CuponHistoryList> {
     state = CuponHistoryListState(page: 1);
     if (widget.controller != null) {
       widget.controller!.state = state;
+      widget.controller!.onRefresh = _refresh;
       widget.controller!.addListener(() {
         setState(() {});
       });
@@ -36,6 +37,13 @@ class _CuponHistoryListState extends ConsumerState<CuponHistoryList> {
     widget.controller?.dispose();
   }
 
+  void _refresh() {
+    // ignore: unused_result
+    ref.refresh(fetchUserRedeemHistoryProvider(
+      RedeemHistoryHttpRequest(page: state.page),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     final redeemHistory = ref.watch(fetchUserRedeemHistoryProvider(
@@ -46,6 +54,7 @@ class _CuponHistoryListState extends ConsumerState<CuponHistoryList> {
         data: (info) => RefreshIndicator(
               onRefresh: () {
                 widget.controller?.reset();
+                _refresh();
                 return Future.value();
               },
               child: ListView.separated(

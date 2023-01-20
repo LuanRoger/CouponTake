@@ -1,10 +1,10 @@
 import 'package:cupon_take/models/enums/app_brightness.dart';
-import 'package:cupon_take/models/enums/enviroment.dart';
+import 'package:cupon_take/models/enums/environment.dart';
 import 'package:cupon_take/providers/providers.dart';
 import 'package:cupon_take/routes/app_routes.dart';
 import 'package:cupon_take/routes/route_driver.dart';
 import 'package:cupon_take/shared/app_theme_data.dart';
-import 'package:cupon_take/shared/enviromet_configuration.dart';
+import 'package:cupon_take/shared/environment_configuration.dart';
 import 'package:cupon_take/shared/global.dart';
 import 'package:cupon_take/shared/preferences/global_preferences.dart';
 import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
@@ -23,10 +23,10 @@ void main() async {
   preferencesProvider =
       ChangeNotifierProvider<GlobalPreferences>((_) => globalPreferences);
 
-  //Enviroment initialization
-  Enviroment enviroment =
-      kDebugMode ? Enviroment.DEVELOPMENT : Enviroment.PRODUCTION;
-  envVars = await EnviromentConfiguration.init(enviroment, forceProd: true);
+  //Environment initialization
+  Environment environment =
+      kDebugMode ? Environment.DEVELOPMENT : Environment.PRODUCTION;
+  envVars = await EnvironmentConfiguration.init(environment, forceProd: true);
 
   runApp(const ProviderScope(child: MainApp()));
 }

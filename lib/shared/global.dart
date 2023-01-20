@@ -1,3 +1,3 @@
-import 'package:cupon_take/models/enviroment_variables.dart';
+import 'package:cupon_take/models/environment_variables.dart';
 
-late final EnviromentVariables envVars;
+late final EnvironmentVariables envVars;

@@ -1,4 +1,4 @@
-import 'package:cupon_take/shared/widgets/material_card.dart';
+import 'package:cupon_take/shared/widgets/filled_material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

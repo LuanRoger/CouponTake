@@ -25,9 +25,10 @@ class AuthServices {
           statusCode: response.statusCode!, body: response.data);
     } on DioError catch (e) {
       return HttpResponse(
-          statusCode: e.response!.statusCode!, body: e.response!.data);
+          statusCode: e.response?.statusCode ?? HttpCodes.UNAVAILABLE.code,
+          body: e.response?.data ?? "");
     } catch (e) {
-      return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
+      return HttpResponse(statusCode: HttpCodes.UNAVAILABLE.code, body: "");
     } finally {
       dioClient.close();
     }
@@ -42,9 +43,10 @@ class AuthServices {
           statusCode: response.statusCode!, body: response.data);
     } on DioError catch (e) {
       return HttpResponse(
-          statusCode: e.response!.statusCode!, body: e.response!.data);
+          statusCode: e.response?.statusCode ?? HttpCodes.UNAVAILABLE.code,
+          body: e.response?.data ?? "");
     } catch (_) {
-      return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
+      return HttpResponse(statusCode: HttpCodes.UNAVAILABLE.code, body: "");
     }
   }
 
@@ -59,8 +61,12 @@ class AuthServices {
 
       return HttpResponse(
           statusCode: response.statusCode!, body: response.data);
+    } on DioError catch (e) {
+      return HttpResponse(
+          statusCode: e.response?.statusCode ?? HttpCodes.UNAVAILABLE.code,
+          body: e.response?.data ?? "");
     } catch (_) {
-      return HttpResponse(statusCode: HttpCodes.NOT_FOUND.code, body: "");
+      return HttpResponse(statusCode: HttpCodes.UNAVAILABLE.code, body: "");
     } finally {
       clientWAuth.close();
     }

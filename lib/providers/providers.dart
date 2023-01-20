@@ -1,6 +1,9 @@
 import 'package:cupon_take/models/cupon.dart';
 import 'package:cupon_take/models/cupon_redeem.dart';
 import 'package:cupon_take/models/enums/http_codes.dart';
+import 'package:cupon_take/models/exceptions/empty_list_exception.dart';
+import 'package:cupon_take/models/exceptions/http_not_succeed_exception.dart';
+import 'package:cupon_take/models/exceptions/no_auth_key_exception.dart';
 import 'package:cupon_take/models/http_response.dart';
 import 'package:cupon_take/models/redeem_history_http_request.dart';
 import 'package:cupon_take/models/theme_preferences.dart';
@@ -37,13 +40,13 @@ final fetchUserInfoProvider = FutureProvider<UserInfo>((ref) async {
   final userAuthKey = ref.watch(userAuthProvider);
 
   if (userAuthKey == null || userAuthKey.isEmpty) {
-    throw Exception("There is no Auth Key");
+    throw NoAuthException();
   }
 
   AuthServices authServices = AuthServices();
   HttpResponse response = await authServices.getUserInfo(userAuthKey);
   if (response.statusCode != HttpCodes.SUCCESS.code) {
-    throw Exception("The operation was not succeded");
+    throw HttpNotSucceedException("getUserInfo", code: response.statusCode);
   }
 
   return UserInfo(response.body["username"] as String,
@@ -56,14 +59,15 @@ final fetchUserRedeemHistoryProvider =
   final userAuthKey = ref.watch(userAuthProvider);
 
   if (userAuthKey == null || userAuthKey.isEmpty) {
-    throw Exception("There is no Auth Key");
+    throw NoAuthException();
   }
 
   CuponServices cuponServices = CuponServices();
   final response =
       await cuponServices.getRedeemHistory(userAuthKey, requestInfo);
   if (response.statusCode != HttpCodes.SUCCESS.code) {
-    throw Exception("The operation was not succeded");
+    throw HttpNotSucceedException("getRedeemHistory",
+        code: response.statusCode);
   }
 
   List<CuponRedeem> history = List.empty(growable: true);
@@ -78,7 +82,7 @@ final fetchUserRedeemHistoryProvider =
       ),
     );
   }
-  if (history.isEmpty) throw Exception("There is no record in the list.");
+  if (history.isEmpty) throw EmptyListExceeption();
 
   return history;
 });

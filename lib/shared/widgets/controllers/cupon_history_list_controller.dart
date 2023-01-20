@@ -5,6 +5,7 @@ class CuponHistoryListController extends ChangeNotifier {
   late CuponHistoryListState _state;
 
   void Function()? onReset;
+  void Function()? onRefresh;
 
   CuponHistoryListController({this.onReset}) {
     _state = CuponHistoryListState(page: 1);
@@ -26,6 +27,10 @@ class CuponHistoryListController extends ChangeNotifier {
 
     _state.page--;
     notifyListeners();
+  }
+
+  void refresh() {
+    onRefresh?.call();
   }
 
   void reset() {

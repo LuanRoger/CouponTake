@@ -8,6 +8,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class HomePage extends HookWidget {
+  const HomePage({super.key});
+
   Widget _changeDestination(int index) {
     switch (index) {
       case 0:

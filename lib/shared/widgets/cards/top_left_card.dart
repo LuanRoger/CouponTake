@@ -1,3 +1,5 @@
+// ignore_for_file: unused_result, use_build_context_synchronously
+
 import 'package:cupon_take/models/enums/http_codes.dart';
 import 'package:cupon_take/providers/providers.dart';
 import 'package:cupon_take/services/points_services.dart';
@@ -50,6 +52,7 @@ class TopLeftCard extends CardBase {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text("Pontos regatados com sucesso")));
+                        ref.refresh(fetchUserInfoProvider);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
