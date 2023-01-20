@@ -1,5 +1,5 @@
-import 'package:cupon_take/models/enums/app_brightness.dart';
-import 'package:cupon_take/models/theme_preferences.dart';
+import 'package:coupon_take/models/enums/app_brightness.dart';
+import 'package:coupon_take/models/theme_preferences.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ThemePreferencesState extends StateNotifier<ThemePreferences> {

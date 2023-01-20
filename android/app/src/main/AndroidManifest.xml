@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cupon_take">
+    package="com.example.coupon_take">
    <application
-        android:label="cupon_take"
+        android:label="coupon_take"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

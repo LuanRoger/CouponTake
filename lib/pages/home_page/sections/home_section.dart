@@ -1,8 +1,8 @@
-import 'package:cupon_take/models/user_info.dart';
-import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
-import 'package:cupon_take/shared/widgets/cards/top_left_card.dart';
-import 'package:cupon_take/shared/widgets/cards/right_card.dart';
-import 'package:cupon_take/shared/widgets/cards/bottom_left_card.dart';
+import 'package:coupon_take/models/user_info.dart';
+import 'package:coupon_take/shared/responsive_breakpoints_name.dart';
+import 'package:coupon_take/shared/widgets/cards/top_left_card.dart';
+import 'package:coupon_take/shared/widgets/cards/right_card.dart';
+import 'package:coupon_take/shared/widgets/cards/bottom_left_card.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 

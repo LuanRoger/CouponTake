@@ -1,13 +1,13 @@
-import 'package:cupon_take/shared/widgets/controllers/cupon_history_list_controller.dart';
-import 'package:cupon_take/shared/widgets/cupon_history_list.dart';
+import 'package:coupon_take/shared/widgets/controllers/coupon_history_list_controller.dart';
+import 'package:coupon_take/shared/widgets/coupon_history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class HistorySection extends HookWidget {
-  late final CuponHistoryListController controller;
+  late final CouponHistoryListController controller;
 
   HistorySection({super.key}) {
-    controller = CuponHistoryListController();
+    controller = CouponHistoryListController();
   }
 
   @override
@@ -83,7 +83,7 @@ class HistorySection extends HookWidget {
                           ),
                         ),
                         Expanded(
-                          child: CuponHistoryList(
+                          child: CouponHistoryList(
                             controller: controller,
                           ),
                         ),

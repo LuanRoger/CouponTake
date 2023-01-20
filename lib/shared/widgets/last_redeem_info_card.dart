@@ -1,11 +1,11 @@
-import 'package:cupon_take/shared/widgets/filled_material_card.dart';
+import 'package:coupon_take/shared/widgets/filled_material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LastRedeemInfoCard extends HookConsumerWidget {
-  String? cuponCode;
+  String? couponCode;
 
-  LastRedeemInfoCard({super.key, this.cuponCode});
+  LastRedeemInfoCard({super.key, this.couponCode});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class LastRedeemInfoCard extends HookConsumerWidget {
                 .bodyLarge!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
-          Text(cuponCode ?? "Não houve recentes.")
+          Text(couponCode ?? "Não houve recentes.")
         ]),
       ),
     );

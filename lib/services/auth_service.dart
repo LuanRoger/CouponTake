@@ -1,7 +1,7 @@
-import 'package:cupon_take/models/enums/http_codes.dart';
-import 'package:cupon_take/models/http_response.dart';
-import 'package:cupon_take/models/user_info_http_request.dart';
-import 'package:cupon_take/shared/global.dart';
+import 'package:coupon_take/models/enums/http_codes.dart';
+import 'package:coupon_take/models/http_response.dart';
+import 'package:coupon_take/models/user_info_http_request.dart';
+import 'package:coupon_take/shared/global.dart';
 import 'package:dio/dio.dart';
 
 class AuthServices {

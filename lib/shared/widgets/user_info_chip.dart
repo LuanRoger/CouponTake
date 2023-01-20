@@ -1,4 +1,4 @@
-import 'package:cupon_take/models/user_info.dart';
+import 'package:coupon_take/models/user_info.dart';
 import 'package:flutter/material.dart';
 
 class UsernameInfoChip extends StatelessWidget {

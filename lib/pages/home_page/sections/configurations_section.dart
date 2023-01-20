@@ -1,8 +1,8 @@
-import 'package:cupon_take/models/enums/app_brightness.dart';
-import 'package:cupon_take/providers/providers.dart';
-import 'package:cupon_take/shared/app_theme_data.dart';
-import 'package:cupon_take/shared/widgets/bottom_sheet.dart';
-import 'package:cupon_take/shared/widgets/color_preview.dart';
+import 'package:coupon_take/models/enums/app_brightness.dart';
+import 'package:coupon_take/providers/providers.dart';
+import 'package:coupon_take/shared/app_theme_data.dart';
+import 'package:coupon_take/shared/widgets/bottom_sheet.dart';
+import 'package:coupon_take/shared/widgets/color_preview.dart';
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

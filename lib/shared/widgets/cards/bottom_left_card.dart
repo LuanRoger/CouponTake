@@ -1,17 +1,17 @@
 // ignore_for_file: use_build_context_synchronously, unused_result
 
-import 'package:cupon_take/models/enums/http_codes.dart';
-import 'package:cupon_take/models/redeem_history_http_request.dart';
-import 'package:cupon_take/models/user_info.dart';
-import 'package:cupon_take/providers/providers.dart';
-import 'package:cupon_take/services/cupon_services.dart';
-import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
-import 'package:cupon_take/shared/widgets/bottom_sheet.dart';
-import 'package:cupon_take/shared/widgets/cards/cards_base.dart';
-import 'package:cupon_take/shared/widgets/dynamic_ex_fab.dart';
-import 'package:cupon_take/shared/widgets/last_redeem_info_card.dart';
-import 'package:cupon_take/shared/widgets/no_account_message.dart';
-import 'package:cupon_take/shared/widgets/user_info_chip.dart';
+import 'package:coupon_take/models/enums/http_codes.dart';
+import 'package:coupon_take/models/redeem_history_http_request.dart';
+import 'package:coupon_take/models/user_info.dart';
+import 'package:coupon_take/providers/providers.dart';
+import 'package:coupon_take/services/coupon_services.dart';
+import 'package:coupon_take/shared/responsive_breakpoints_name.dart';
+import 'package:coupon_take/shared/widgets/bottom_sheet.dart';
+import 'package:coupon_take/shared/widgets/cards/cards_base.dart';
+import 'package:coupon_take/shared/widgets/dynamic_ex_fab.dart';
+import 'package:coupon_take/shared/widgets/last_redeem_info_card.dart';
+import 'package:coupon_take/shared/widgets/no_account_message.dart';
+import 'package:coupon_take/shared/widgets/user_info_chip.dart';
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,7 +32,7 @@ class BottomLeftCard extends CardBase {
                 builder: (context) => AlertDialog(
                       title: Text("Informações"),
                       content: Text(
-                          "- Os cupons resgatados podem, posteriormente, serem vistos no histórico.\n" +
+                          "- Os coupons resgatados podem, posteriormente, serem vistos no histórico.\n" +
                               "- Para resgatar um cupom é nescessario ter 50 pontos na conta."),
                       actions: [
                         TextButton(
@@ -45,9 +45,9 @@ class BottomLeftCard extends CardBase {
     ]);
   }
 
-  Future<String?> _redeemCupon(String authKey) async {
-    CuponServices cuponServices = CuponServices();
-    final response = await cuponServices.redeemCupon(authKey);
+  Future<String?> _redeemCoupon(String authKey) async {
+    CouponServices couponServices = CouponServices();
+    final response = await couponServices.redeemCoupon(authKey);
     if (response.statusCode != HttpCodes.SUCCESS.code) return null;
 
     return response.body as String;
@@ -59,7 +59,7 @@ class BottomLeftCard extends CardBase {
     final userInfo = ref.watch(fetchUserInfoProvider);
 
     final isLoadingState = useState(false);
-    final lastCuponRedeemState = useState<String?>(null);
+    final lastCouponRedeemState = useState<String?>(null);
 
     return userInfo.maybeWhen(
         data: (info) => Column(
@@ -74,7 +74,7 @@ class BottomLeftCard extends CardBase {
                       if (ResponsiveWrapper.of(context).activeBreakpoint.name ==
                           ResponsiveBreakpointsName.desktopBreakpoint)
                         LastRedeemInfoCard(
-                            cuponCode: lastCuponRedeemState.value),
+                            couponCode: lastCouponRedeemState.value),
                       UsernameInfoChip(info),
                     ],
                   ),
@@ -88,7 +88,7 @@ class BottomLeftCard extends CardBase {
                     enabled: !isLoadingState.value,
                     onPressed: () async {
                       isLoadingState.value = true;
-                      String? code = await _redeemCupon(authKey!);
+                      String? code = await _redeemCoupon(authKey!);
                       if (code != null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -102,7 +102,7 @@ class BottomLeftCard extends CardBase {
                                 content: Text(
                                     "Não foi possivel resgatar o código")));
                       }
-                      lastCuponRedeemState.value = code;
+                      lastCouponRedeemState.value = code;
                       isLoadingState.value = false;
                     },
                   )),

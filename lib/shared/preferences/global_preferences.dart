@@ -1,6 +1,6 @@
-import 'package:cupon_take/models/app_preferences.dart';
-import 'package:cupon_take/models/theme_preferences.dart';
-import 'package:cupon_take/shared/preferences/preferences_keys.dart';
+import 'package:coupon_take/models/app_preferences.dart';
+import 'package:coupon_take/models/theme_preferences.dart';
+import 'package:coupon_take/shared/preferences/preferences_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +20,7 @@ class GlobalPreferences extends ChangeNotifier {
         _preferencesHolder.getInt(PreferencesKeys.themeColor);
 
     preferences = AppPreferences(
-        cupontakeAuthKey: lastAuthKey,
+        coupontakeAuthKey: lastAuthKey,
         themePreferences: ThemePreferences(
             brightness: brightnessPreference ?? 0,
             colorIndex: colorThemePreference ?? 0));
@@ -29,9 +29,9 @@ class GlobalPreferences extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? get cupontakeAuthKey => preferences.cupontakeAuthKey;
-  set cupontakeAuthKey(String? authKey) {
-    preferences.cupontakeAuthKey = authKey;
+  String? get coupontakeAuthKey => preferences.coupontakeAuthKey;
+  set coupontakeAuthKey(String? authKey) {
+    preferences.coupontakeAuthKey = authKey;
     _preferencesHolder.setString(PreferencesKeys.authKey, authKey ?? "");
     notifyListeners();
   }
@@ -53,8 +53,7 @@ class GlobalPreferences extends ChangeNotifier {
 
     preferences.themePreferences =
         preferences.themePreferences.copyWith(colorIndex: colorIndexAsserted);
-    _preferencesHolder.setInt(
-        PreferencesKeys.themeColor, colorIndexAsserted);
+    _preferencesHolder.setInt(PreferencesKeys.themeColor, colorIndexAsserted);
     notifyListeners();
   }
 

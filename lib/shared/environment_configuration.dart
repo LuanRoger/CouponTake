@@ -1,5 +1,5 @@
-import 'package:cupon_take/models/enums/environment.dart';
-import 'package:cupon_take/models/environment_variables.dart';
+import 'package:coupon_take/models/enums/environment.dart';
+import 'package:coupon_take/models/environment_variables.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EnvironmentConfiguration {

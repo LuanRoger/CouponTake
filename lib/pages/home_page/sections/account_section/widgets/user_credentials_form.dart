@@ -1,4 +1,4 @@
-import 'package:cupon_take/shared/validators/forms_validators.dart';
+import 'package:coupon_take/shared/validators/forms_validators.dart';
 import 'package:flutter/material.dart';
 
 class UserCredentialsForm extends StatelessWidget {

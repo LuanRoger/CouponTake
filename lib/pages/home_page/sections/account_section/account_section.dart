@@ -1,9 +1,9 @@
-import 'package:cupon_take/models/enums/http_codes.dart';
-import 'package:cupon_take/models/http_response.dart';
-import 'package:cupon_take/models/user_info_http_request.dart';
-import 'package:cupon_take/pages/home_page/sections/account_section/widgets/user_credentials_form.dart';
-import 'package:cupon_take/providers/providers.dart';
-import 'package:cupon_take/services/auth_service.dart';
+import 'package:coupon_take/models/enums/http_codes.dart';
+import 'package:coupon_take/models/http_response.dart';
+import 'package:coupon_take/models/user_info_http_request.dart';
+import 'package:coupon_take/pages/home_page/sections/account_section/widgets/user_credentials_form.dart';
+import 'package:coupon_take/providers/providers.dart';
+import 'package:coupon_take/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,7 +34,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
       return false;
     }
 
-    ref.read(preferencesProvider).cupontakeAuthKey = response.body;
+    ref.read(preferencesProvider).coupontakeAuthKey = response.body;
     return true;
   }
 
@@ -47,7 +47,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
       return false;
     }
 
-    ref.read(preferencesProvider).cupontakeAuthKey = response.body;
+    ref.read(preferencesProvider).coupontakeAuthKey = response.body;
     return true;
   }
 
@@ -131,7 +131,7 @@ class _UserInfoViwer extends HookConsumerWidget {
 
   void _logout(WidgetRef ref) {
     ref.read(userAuthProvider.notifier).logout();
-    ref.read(preferencesProvider).cupontakeAuthKey = null;
+    ref.read(preferencesProvider).coupontakeAuthKey = null;
   }
 
   @override

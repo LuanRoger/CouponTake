@@ -1,5 +1,5 @@
-name: cupon_take
-description: Redeem random codes using the CuponTake API.
+name: coupon_take
+description: Redeem random codes using the CouponTake API.
 publish_to: 'none'
 version: 1.0.0
 

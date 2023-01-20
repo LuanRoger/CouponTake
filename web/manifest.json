@@ -1,6 +1,6 @@
 {
-    "name": "cupon_take",
-    "short_name": "cupon_take",
+    "name": "coupon_take",
+    "short_name": "coupon_take",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
