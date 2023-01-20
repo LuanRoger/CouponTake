@@ -22,15 +22,15 @@ builder.Services.AddDbContext<MainClusterDb>(options =>
     
     if(builder.Environment.IsProduction())
     {
-        string? postgresMainDbUser = EnviromentUtils.GetPostgresMainDbUser();
-        string? postgresMainDbPassword = EnviromentUtils.GetPostgresMainDbPassword();
-        string postgresPort = EnviromentUtils.GetPostgresPort() ?? "5432";
+        string? postgresMainDbUser = EnvironmentUtils.GetPostgresMainDbUser();
+        string? postgresMainDbPassword = EnvironmentUtils.GetPostgresMainDbPassword();
+        string postgresPort = EnvironmentUtils.GetPostgresPort() ?? "5432";
         
         if(postgresMainDbPassword is null)
-            throw new NullEnviromentVariableException(nameof(postgresMainDbPassword), 
+            throw new NullEnvironmentVariableException(nameof(postgresMainDbPassword), 
                 builder.Environment.EnvironmentName);
         if(postgresMainDbUser is null)
-            throw new NullEnviromentVariableException(nameof(postgresMainDbUser), 
+            throw new NullEnvironmentVariableException(nameof(postgresMainDbUser), 
                 builder.Environment.EnvironmentName);
         
         connString = string.Format(connString, postgresMainDbUser, postgresMainDbPassword, postgresPort);

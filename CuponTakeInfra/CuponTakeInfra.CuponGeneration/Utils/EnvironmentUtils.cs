@@ -1,6 +1,6 @@
 ﻿namespace CuponTakeInfra.CuponGeneration.Utils;
 
-public class EnviromentUtils
+public class EnvironmentUtils
 {
     public static string? GetPostgresMainDbPassword() => 
         Environment.GetEnvironmentVariable(EnvVariableConsts.POSTGRES_MAIN_DB_PASSWORD);
