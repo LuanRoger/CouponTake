@@ -5,6 +5,7 @@ import 'package:coupon_take/shared/widgets/controllers/coupon_history_list_state
 import 'package:coupon_take/shared/widgets/coupon_history_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CouponHistoryList extends ConsumerStatefulWidget {
   final CouponHistoryListController? controller;
@@ -72,7 +73,7 @@ class _CouponHistoryListState extends ConsumerState<CouponHistoryList> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.history_rounded),
-                    Text("Não há histórico registrado.")
+                    Text(AppLocalizations.of(context)!.noHistoryWarning)
                   ]),
             ));
   }

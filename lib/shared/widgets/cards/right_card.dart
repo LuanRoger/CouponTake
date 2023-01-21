@@ -11,6 +11,6 @@ class RightCard extends CardBase {
 
   @override
   Widget virtualBuild(BuildContext context, WidgetRef ref) {
-    return CouponHistoryList();
+    return const CouponHistoryList();
   }
 }

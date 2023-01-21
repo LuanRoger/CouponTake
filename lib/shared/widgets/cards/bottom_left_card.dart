@@ -2,25 +2,22 @@
 
 import 'package:coupon_take/models/enums/http_codes.dart';
 import 'package:coupon_take/models/redeem_history_http_request.dart';
-import 'package:coupon_take/models/user_info.dart';
 import 'package:coupon_take/providers/providers.dart';
 import 'package:coupon_take/services/coupon_services.dart';
 import 'package:coupon_take/shared/responsive_breakpoints_name.dart';
-import 'package:coupon_take/shared/widgets/bottom_sheet.dart';
 import 'package:coupon_take/shared/widgets/cards/cards_base.dart';
 import 'package:coupon_take/shared/widgets/dynamic_ex_fab.dart';
 import 'package:coupon_take/shared/widgets/last_redeem_info_card.dart';
 import 'package:coupon_take/shared/widgets/no_account_message.dart';
 import 'package:coupon_take/shared/widgets/user_info_chip.dart';
-import 'package:flutter/material.dart' hide BottomSheet;
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomLeftCard extends CardBase {
-  UserInfo userInfo;
-
-  BottomLeftCard(this.userInfo, {super.key, required super.cardTitle});
+  BottomLeftCard({super.key, required super.cardTitle});
 
   @override
   Widget? headerActions(BuildContext context) {
@@ -30,14 +27,15 @@ class BottomLeftCard extends CardBase {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                      title: Text("Informações"),
-                      content: Text(
-                          "- Os coupons resgatados podem, posteriormente, serem vistos no histórico.\n" +
-                              "- Para resgatar um cupom é nescessario ter 50 pontos na conta."),
+                      title: Text(AppLocalizations.of(context)!
+                          .alertDialogRedeemInfoTitle),
+                      content: Text(AppLocalizations.of(context)!
+                          .alertDialogRedeemInfoContent),
                       actions: [
                         TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: const Text("Continuar"))
+                            child: Text(
+                                AppLocalizations.of(context)!.continueText))
                       ],
                     ));
           },
@@ -84,23 +82,23 @@ class BottomLeftCard extends CardBase {
                   child: Center(
                       child: DynamicExFab(
                     icon: Icons.api_rounded,
-                    label: const Text("Requisitar código"),
+                    label:
+                        Text(AppLocalizations.of(context)!.fabRedeemCouponText),
                     enabled: !isLoadingState.value,
                     onPressed: () async {
                       isLoadingState.value = true;
                       String? code = await _redeemCoupon(authKey!);
                       if (code != null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("Código resgatado com sucesso")));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .snackBarRedeemCouponSuccessfully)));
                         ref.refresh(fetchUserInfoProvider);
                         ref.refresh(fetchUserRedeemHistoryProvider(
                             const RedeemHistoryHttpRequest(page: 1)));
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text(
-                                    "Não foi possivel resgatar o código")));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .snackBarRedeemCouponUnsuccessfully)));
                       }
                       lastCouponRedeemState.value = code;
                       isLoadingState.value = false;
