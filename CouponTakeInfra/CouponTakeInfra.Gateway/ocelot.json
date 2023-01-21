@@ -1,0 +1,71 @@
+﻿{
+  "GlobalConfiguration": {
+    "RateLimitOptions": {
+      "EnableRateLimit": true,
+      "Period": "10s",
+      "PeriodTimeSpan": 10,
+      "Limit": 3
+    }
+  },
+  "Routes": [{
+    "UpstreamPathTemplate": "/auth/login",
+    "DownstreamPathTemplate": "/login",
+    "UpstreamMethods": ["Post"],
+    "DownstreamScheme": "http",
+    "DownstreamHostAndPorts": [{
+      "Host": "coupontake-auth",
+      "Port": 80
+    }]
+  },
+    {
+      "UpstreamPathTemplate": "/auth/register",
+      "DownstreamPathTemplate": "/register",
+      "UpstreamMethods": ["Post"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "coupontake-auth",
+        "Port": 80
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/auth/user",
+      "DownstreamPathTemplate": "/user",
+      "UpstreamHttpMethod": ["Get"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "coupontake-auth",
+        "Port": 80
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/coupon/redeem",
+      "DownstreamPathTemplate": "/redeem",
+      "UpstreamMethods": ["Get"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "coupontake-coupon-generator",
+        "Port": 80
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/coupon/points",
+      "DownstreamPathTemplate": "/points",
+      "UpstreamHttpMethod": ["Post"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "coupontake-coupon-generator",
+        "Port": 80
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/coupon/history",
+      "DownstreamPathTemplate": "/history",
+      "UpstreamHttpMethod": ["Get"],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{
+        "Host": "coupontake-coupon-generator",
+        "Port": 80
+      }]
+    }
+  ]
+}

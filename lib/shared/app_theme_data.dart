@@ -1,4 +1,4 @@
-import 'package:cupon_take/models/enums/app_brightness.dart';
+import 'package:coupon_take/models/enums/app_brightness.dart';
 import 'package:flutter/material.dart';
 
 class AppThemeData {

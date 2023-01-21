@@ -1,5 +1,6 @@
-import 'package:cupon_take/shared/validators/forms_validators.dart';
+import 'package:coupon_take/shared/validators/forms_validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserCredentialsForm extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -17,11 +18,13 @@ class UserCredentialsForm extends StatelessWidget {
           children: [
             TextFormField(
               controller: usernameTextController,
-              decoration: const InputDecoration(
-                  labelText: "Nome de usuário", border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.textFieldUsername,
+                  border: const OutlineInputBorder()),
               validator: (value) {
                 if (!FormsValidators.checkNotEmptyAndLengh(value, 3)) {
-                  return "O nome deve ter ao menos 3 caracteres.";
+                  return AppLocalizations.of(context)!
+                      .textFieldValidationErrorUsername;
                 }
 
                 return null;
@@ -32,13 +35,15 @@ class UserCredentialsForm extends StatelessWidget {
               controller: passwordTextController,
               validator: (value) {
                 if (!FormsValidators.checkNotEmptyAndLengh(value, 8)) {
-                  return "A senha deve ter ao menos 8 caracteres.";
+                  return AppLocalizations.of(context)!
+                      .textFieldValidationErrorPassword;
                 }
 
                 return null;
               },
-              decoration: const InputDecoration(
-                  labelText: "Senha", border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.textFieldPassword,
+                  border: const OutlineInputBorder()),
               obscureText: true,
               enableSuggestions: false,
               autocorrect: false,

@@ -1,18 +1,18 @@
-import 'package:cupon_take/shared/widgets/controllers/cupon_history_list_controller.dart';
-import 'package:cupon_take/shared/widgets/cupon_history_list.dart';
+import 'package:coupon_take/shared/widgets/controllers/coupon_history_list_controller.dart';
+import 'package:coupon_take/shared/widgets/coupon_history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistorySection extends HookWidget {
-  late final CuponHistoryListController controller;
+  late final CouponHistoryListController controller;
 
   HistorySection({super.key}) {
-    controller = CuponHistoryListController();
+    controller = CouponHistoryListController();
   }
 
   @override
   Widget build(BuildContext context) {
-    final selectedFilterSegmentState = useState(<String>{});
     final currentPageState = useState(controller.page);
     useEffect(() {
       controller.onReset = () => currentPageState.value = controller.page;
@@ -21,7 +21,7 @@ class HistorySection extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Histórico"),
+        title: Text(AppLocalizations.of(context)!.appBarHistoryTitle),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,17 +37,6 @@ class HistorySection extends HookWidget {
                         currentPageState.value = controller.page;
                       },
                       icon: const Icon(Icons.navigate_before_rounded)),
-                  SegmentedButton(
-                    segments: const [
-                      ButtonSegment(label: Text("Otem"), value: "Ontem"),
-                      ButtonSegment(label: Text("Hoje"), value: "Hoje")
-                    ],
-                    selected: selectedFilterSegmentState.value,
-                    onSelectionChanged: (newValue) {
-                      selectedFilterSegmentState.value = newValue;
-                    },
-                    emptySelectionAllowed: true,
-                  ),
                   IconButton(
                       onPressed: () {
                         controller.nextPage();
@@ -71,7 +60,8 @@ class HistorySection extends HookWidget {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              "Página: ${controller.page}",
+                              AppLocalizations.of(context)!
+                                  .page(controller.page),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
@@ -83,7 +73,7 @@ class HistorySection extends HookWidget {
                           ),
                         ),
                         Expanded(
-                          child: CuponHistoryList(
+                          child: CouponHistoryList(
                             controller: controller,
                           ),
                         ),

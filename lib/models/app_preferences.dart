@@ -1,9 +1,12 @@
-import 'package:cupon_take/models/theme_preferences.dart';
+import 'package:coupon_take/models/theme_preferences.dart';
 
 class AppPreferences {
-  String? cupontakeAuthKey;
+  String? coupontakeAuthKey;
   ThemePreferences themePreferences;
+  int localeIndex;
 
   AppPreferences(
-      {required this.cupontakeAuthKey, required this.themePreferences});
+      {required this.coupontakeAuthKey,
+      required this.themePreferences,
+      required this.localeIndex});
 }

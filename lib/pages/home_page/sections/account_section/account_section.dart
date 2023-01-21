@@ -1,20 +1,26 @@
-import 'package:cupon_take/models/enums/http_codes.dart';
-import 'package:cupon_take/models/http_response.dart';
-import 'package:cupon_take/models/user_info_http_request.dart';
-import 'package:cupon_take/pages/home_page/sections/account_section/widgets/user_credentials_form.dart';
-import 'package:cupon_take/providers/providers.dart';
-import 'package:cupon_take/services/auth_service.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:coupon_take/models/enums/http_codes.dart';
+import 'package:coupon_take/models/http_response.dart';
+import 'package:coupon_take/models/user_info_http_request.dart';
+import 'package:coupon_take/pages/home_page/sections/account_section/widgets/user_credentials_form.dart';
+import 'package:coupon_take/providers/providers.dart';
+import 'package:coupon_take/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountSection extends HookConsumerWidget {
+  const AccountSection({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userInfoProvider = ref.watch(fetchUserInfoProvider);
 
     return Scaffold(
-        appBar: AppBar(title: const Text("Conta")),
+        appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.appBarAccountTitle)),
         body: userInfoProvider.maybeWhen(
             data: (info) => _UserInfoViwer(info.username),
             loading: () => const Center(child: CircularProgressIndicator()),
@@ -23,7 +29,7 @@ class AccountSection extends HookConsumerWidget {
 }
 
 class _UserCredentialsForm extends HookConsumerWidget {
-  const _UserCredentialsForm({super.key});
+  const _UserCredentialsForm();
 
   Future<bool> _login(
       WidgetRef ref, UserInfoHttpRequest userInfoRequest) async {
@@ -34,7 +40,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
       return false;
     }
 
-    ref.read(preferencesProvider).cupontakeAuthKey = response.body;
+    ref.read(preferencesProvider).coupontakeAuthKey = response.body;
     return true;
   }
 
@@ -47,7 +53,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
       return false;
     }
 
-    ref.read(preferencesProvider).cupontakeAuthKey = response.body;
+    ref.read(preferencesProvider).coupontakeAuthKey = response.body;
     return true;
   }
 
@@ -79,7 +85,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ElevatedButton(
-                        child: Text("Entrar"),
+                        child: Text(AppLocalizations.of(context)!.buttonLogin),
                         onPressed: () async {
                           isLoadingState.value = true;
                           if (credentialsForm.formKey.currentState!
@@ -91,14 +97,16 @@ class _UserCredentialsForm extends HookConsumerWidget {
                                     passwordTextControllerState.text));
                             if (!success) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("Credenciais incorretas")));
+                                  SnackBar(
+                                      content: Text(
+                                          AppLocalizations.of(context)!
+                                              .snackBarIncorrectCredentials)));
                             }
                           }
                           isLoadingState.value = false;
                         }),
                     ElevatedButton(
-                        child: Text("Cadastrar"),
+                        child: Text(AppLocalizations.of(context)!.buttonSignin),
                         onPressed: () async {
                           isLoadingState.value = true;
                           if (credentialsForm.formKey.currentState!
@@ -110,8 +118,10 @@ class _UserCredentialsForm extends HookConsumerWidget {
                                     passwordTextControllerState.text));
                             if (!success) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("Credenciais incorretas")));
+                                  SnackBar(
+                                      content: Text(
+                                          AppLocalizations.of(context)!
+                                              .snackBarIncorrectCredentials)));
                             }
                           }
                           isLoadingState.value = false;
@@ -131,7 +141,7 @@ class _UserInfoViwer extends HookConsumerWidget {
 
   void _logout(WidgetRef ref) {
     ref.read(userAuthProvider.notifier).logout();
-    ref.read(preferencesProvider).cupontakeAuthKey = null;
+    ref.read(preferencesProvider).coupontakeAuthKey = null;
   }
 
   @override

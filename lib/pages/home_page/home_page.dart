@@ -1,11 +1,12 @@
-import 'package:cupon_take/pages/home_page/sections/account_section/account_section.dart';
-import 'package:cupon_take/pages/home_page/sections/configurations_section.dart';
-import 'package:cupon_take/pages/home_page/sections/history_section.dart';
-import 'package:cupon_take/pages/home_page/sections/home_section.dart';
-import 'package:cupon_take/shared/responsive_breakpoints_name.dart';
+import 'package:coupon_take/pages/home_page/sections/account_section/account_section.dart';
+import 'package:coupon_take/pages/home_page/sections/configurations_section.dart';
+import 'package:coupon_take/pages/home_page/sections/history_section.dart';
+import 'package:coupon_take/pages/home_page/sections/home_section.dart';
+import 'package:coupon_take/shared/responsive_breakpoints_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends HookWidget {
   const HomePage({super.key});
@@ -46,22 +47,26 @@ class HomePage extends HookWidget {
               child: NavigationRail(
                 selectedIndex: selectedRailIndexState.value,
                 labelType: NavigationRailLabelType.all,
-                destinations: const [
+                destinations: [
                   NavigationRailDestination(
-                    icon: Icon(Icons.home_rounded),
-                    label: Text("Inicío"),
+                    icon: const Icon(Icons.home_rounded),
+                    label:
+                        Text(AppLocalizations.of(context)!.navigationBarHome),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.account_circle_rounded),
-                    label: Text("Conta"),
+                    icon: const Icon(Icons.account_circle_rounded),
+                    label: Text(
+                        AppLocalizations.of(context)!.navigationBarAccount),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.history_rounded),
-                    label: Text("Histórico"),
+                    icon: const Icon(Icons.history_rounded),
+                    label: Text(
+                        AppLocalizations.of(context)!.navigationBarHistory),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.settings_rounded),
-                    label: Text("Configurações"),
+                    icon: const Icon(Icons.settings_rounded),
+                    label: Text(
+                        AppLocalizations.of(context)!.navigationBarSettings),
                   ),
                 ],
                 onDestinationSelected: (newIndex) {
@@ -93,22 +98,23 @@ class HomePage extends HookWidget {
                 name: ResponsiveBreakpointsName.mobileBreakpoint,
                 value: NavigationBar(
                   selectedIndex: selectedRailIndexState.value,
-                  destinations: const [
+                  destinations: [
                     NavigationDestination(
-                      icon: Icon(Icons.home_rounded),
-                      label: "Inicío",
+                      icon: const Icon(Icons.home_rounded),
+                      label: AppLocalizations.of(context)!.navigationBarHome,
                     ),
                     NavigationDestination(
-                      icon: Icon(Icons.account_circle_rounded),
-                      label: "Conta",
+                      icon: const Icon(Icons.account_circle_rounded),
+                      label: AppLocalizations.of(context)!.navigationBarAccount,
                     ),
                     NavigationDestination(
-                      icon: Icon(Icons.history_rounded),
-                      label: "Histórico",
+                      icon: const Icon(Icons.history_rounded),
+                      label: AppLocalizations.of(context)!.navigationBarHistory,
                     ),
                     NavigationDestination(
                       icon: Icon(Icons.settings_rounded),
-                      label: "Configurações",
+                      label:
+                          AppLocalizations.of(context)!.navigationBarSettings,
                     )
                   ],
                   onDestinationSelected: (newIndex) {
