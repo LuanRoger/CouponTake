@@ -102,6 +102,7 @@ class ConfigurationSection extends HookConsumerWidget {
                   ref
                       .read(localePreferencesProvider.notifier)
                       .changeLocalization(value as Localization);
+                  ref.read(preferencesProvider).localeIndex = value.code;
                 },
                 decoration: const InputDecoration(border: OutlineInputBorder()),
                 isExpanded: true,
