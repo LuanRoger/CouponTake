@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:coupon_take/l10n/l10n.dart';
 import 'package:coupon_take/models/coupon.dart';
 import 'package:coupon_take/models/coupon_redeem.dart';
 import 'package:coupon_take/models/enums/http_codes.dart';
@@ -8,6 +11,7 @@ import 'package:coupon_take/models/http_response.dart';
 import 'package:coupon_take/models/redeem_history_http_request.dart';
 import 'package:coupon_take/models/theme_preferences.dart';
 import 'package:coupon_take/models/user_info.dart';
+import 'package:coupon_take/providers/interfaces/locale_preferences_state.dart';
 import 'package:coupon_take/providers/interfaces/theme_preferences_state.dart';
 import 'package:coupon_take/services/auth_service.dart';
 import 'package:coupon_take/services/coupon_services.dart';
@@ -20,9 +24,10 @@ late final ChangeNotifierProvider<GlobalPreferences> preferencesProvider;
 
 final userAuthProvider =
     StateNotifierProvider<UserAuthKeyState, String?>((ref) {
-  final userAuthKeyProvider = ref.watch(preferencesProvider);
+  final userAuthKeyPreference = ref.watch(preferencesProvider
+      .select((value) => value.preferences.coupontakeAuthKey));
 
-  return UserAuthKeyState(authKey: userAuthKeyProvider.coupontakeAuthKey);
+  return UserAuthKeyState(authKey: userAuthKeyPreference);
 });
 
 final themePreferencesProvider =
@@ -34,6 +39,14 @@ final themePreferencesProvider =
     ThemePreferences(
         brightness: preferences.brightness, colorIndex: preferences.colorIndex),
   );
+});
+
+final localePreferencesProvider =
+    StateNotifierProvider<LocalePreferencesState, Locale?>((ref) {
+  final localeIndexPreference = ref.watch(
+      preferencesProvider.select((value) => value.preferences.localeIndex));
+
+  return LocalePreferencesState(locale: L10n.locales[localeIndexPreference]);
 });
 
 final fetchUserInfoProvider = FutureProvider<UserInfo>((ref) async {

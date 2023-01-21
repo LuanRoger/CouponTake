@@ -18,12 +18,15 @@ class GlobalPreferences extends ChangeNotifier {
         _preferencesHolder.getInt(PreferencesKeys.brightnessTheme);
     int? colorThemePreference =
         _preferencesHolder.getInt(PreferencesKeys.themeColor);
+    int? localePreferencesIndex =
+        _preferencesHolder.getInt(PreferencesKeys.locale);
 
     preferences = AppPreferences(
         coupontakeAuthKey: lastAuthKey,
         themePreferences: ThemePreferences(
             brightness: brightnessPreference ?? 0,
-            colorIndex: colorThemePreference ?? 0));
+            colorIndex: colorThemePreference ?? 0),
+        localeIndex: localePreferencesIndex ?? 0);
 
     initializated = true;
     notifyListeners();
@@ -54,6 +57,15 @@ class GlobalPreferences extends ChangeNotifier {
     preferences.themePreferences =
         preferences.themePreferences.copyWith(colorIndex: colorIndexAsserted);
     _preferencesHolder.setInt(PreferencesKeys.themeColor, colorIndexAsserted);
+    notifyListeners();
+  }
+
+  int? get localeIndex => preferences.localeIndex;
+  set localeIndex(int? localeIndex) {
+    int localeIndexAsserted = localeIndex ?? 0;
+
+    preferences.localeIndex = preferences.localeIndex = localeIndexAsserted;
+    _preferencesHolder.setInt(PreferencesKeys.locale, localeIndexAsserted);
     notifyListeners();
   }
 
