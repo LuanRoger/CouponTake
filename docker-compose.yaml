@@ -1,0 +1,82 @@
+version: '3.9'
+
+networks:
+  coupontake-infra:
+  db-access:
+
+volumes:
+  coupon-take-db:
+    
+
+services:
+  coupontake-front:
+    container_name: front
+    image: coupontake-front:latest
+    build: .
+    ports:
+      - 80:80
+    networks:
+      - coupontake-infra
+
+  coupontake-gateway:
+    container_name: gateway
+    image: coupontake-gateway:latest
+    build:
+      context: ./CouponTakeInfra/
+      dockerfile: Gateway.Dockerfile
+    ports:
+      - 5198:80
+    networks:
+      - coupontake-infra
+
+  coupontake-auth:
+    container_name: auth-api
+    image: coupontake-auth:latest
+    build: 
+      context: ./CouponTakeInfra/
+      dockerfile: Auth.Dockerfile
+    ports:
+      - 5039:80
+    networks:
+      - coupontake-infra
+      - db-access
+    depends_on:
+      - coupontake-db
+    environment:
+      - POSTGRES_MAIN_DB_USER
+      - POSTGRES_MAIN_DB_PASSWORD
+      - POSTGRES_PORT
+    restart: unless-stopped
+  
+  coupontake-coupon-generator:
+    container_name: coupon-generator-api
+    image: coupontake-generator:latest
+    build:
+      context: ./CouponTakeInfra/
+      dockerfile: CouponGeneration.Dockerfile
+    ports:
+      - 7125:80
+    networks:
+      - coupontake-infra
+      - db-access
+    depends_on:
+      - coupontake-auth
+      - coupontake-db
+    environment:
+      - POSTGRES_MAIN_DB_USER
+      - POSTGRES_MAIN_DB_PASSWORD
+      - POSTGRES_PORT
+    restart: unless-stopped
+
+  coupontake-db:
+    image: postgres:latest
+    container_name: postgres-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    networks:
+      - db-access
+    volumes:
+      - coupon-take-db:/var/lib/postgresql/data

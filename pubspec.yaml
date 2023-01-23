@@ -22,6 +22,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   format: ^1.1.1
   intl: ^0.17.0
+  collection: ^1.17.0
 
 dev_dependencies:
   flutter_test:
@@ -36,8 +37,7 @@ flutter:
   generate: true
 
   assets:
-    - .env.prod
-    - .env.dev
+    - .env
 
   # fonts:
   #   - family: Schyler

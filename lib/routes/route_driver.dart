@@ -12,5 +12,5 @@ class RouteDriver {
   }
 
   static MaterialPageRoute get goToHomePage =>
-      MaterialPageRoute(builder: (_) => HomePage());
+      MaterialPageRoute(builder: (_) => const HomePage());
 }

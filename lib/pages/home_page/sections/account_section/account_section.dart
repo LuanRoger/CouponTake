@@ -137,7 +137,7 @@ class _UserCredentialsForm extends HookConsumerWidget {
 class _UserInfoViwer extends HookConsumerWidget {
   final String username;
 
-  const _UserInfoViwer(this.username, {super.key});
+  const _UserInfoViwer(this.username);
 
   void _logout(WidgetRef ref) {
     ref.read(userAuthProvider.notifier).logout();
@@ -150,7 +150,7 @@ class _UserInfoViwer extends HookConsumerWidget {
       child: Column(children: [
         Text(username),
         ElevatedButton.icon(
-            label: Text("Sair"),
+            label: const Text("Sair"),
             icon: const Icon(Icons.exit_to_app_rounded),
             onPressed: () => _logout(ref)),
       ]),

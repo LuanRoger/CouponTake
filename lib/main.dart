@@ -1,6 +1,5 @@
 import 'package:coupon_take/l10n/l10n.dart';
 import 'package:coupon_take/models/enums/app_brightness.dart';
-import 'package:coupon_take/models/enums/environment.dart';
 import 'package:coupon_take/providers/providers.dart';
 import 'package:coupon_take/routes/app_routes.dart';
 import 'package:coupon_take/routes/route_driver.dart';
@@ -9,7 +8,6 @@ import 'package:coupon_take/shared/environment_configuration.dart';
 import 'package:coupon_take/shared/global.dart';
 import 'package:coupon_take/shared/preferences/global_preferences.dart';
 import 'package:coupon_take/shared/responsive_breakpoints_name.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,10 +24,7 @@ void main() async {
   preferencesProvider =
       ChangeNotifierProvider<GlobalPreferences>((_) => globalPreferences);
 
-  //Environment initialization
-  Environment environment =
-      kDebugMode ? Environment.DEVELOPMENT : Environment.PRODUCTION;
-  envVars = await EnvironmentConfiguration.init(environment, forceProd: true);
+  envVars = await EnvironmentConfiguration.init();
 
   runApp(const ProviderScope(child: MainApp()));
 }
