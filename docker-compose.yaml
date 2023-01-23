@@ -41,7 +41,7 @@ services:
       - coupontake-infra
       - db-access
     depends_on:
-      - coupontake-db    
+      - coupontake-db
     environment:
       - POSTGRES_MAIN_DB_USER
       - POSTGRES_MAIN_DB_PASSWORD
