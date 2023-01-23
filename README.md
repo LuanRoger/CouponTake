@@ -18,19 +18,20 @@ Flutter will be used to build the project for web, thre is no good Flutter image
 The Docker will be used to build the images and run the containers and the Docker Composer is to create a cluster with all APIs and services running on.
 The OpenSSL is just to create the RSA keys used by ```CouponTakeInfra.Auth``` to sign the JWTs.
 
-Clone the repository:
+### Clone the repository
 ```bash
 git clone https://github.com/LuanRoger/CouponTake.git
 cd CouponTake
 ```
 
-Build the Flutter project for the web:
+### Build the Flutter project for the web
 ```bash
 flutter build web --release
 ```
 > NOTE: At the actual moment is preferable that the project is builded by Flutter in the **beta** channel, because some widget is not themed for Material 3 in the stable channel.
 
-Create the the certificates path to store the public and private key that will be used to sign the JWTs:
+### Create the the certificates
+Firs create the path to store the public and private key that will be used to sign the JWTs.
 Create a folder called ```certificates``` on the ```CouponTake/CouponTakeInfra/``` path:
 ```bash
 mkdir CouponTakeInfra/certificates
@@ -43,8 +44,8 @@ openssl rsa -in jwt-auth-priv-key.pem -pubout -out jwt-auth-pub-key.pem
 ```
 Those keys will be copied to the container.
 
-Before start check the .env file and change if needed.
-
+### Build
+Before build check the .env file and change if needed.
 Back to the root of the project (```/CouponTake```), build and start all the services with Docker Compose:
 ```bash
 docker-compose up -d
@@ -70,6 +71,22 @@ If you choose to build and run each Dockerfile by own, keep in mind that you wil
 
 One of them is **CouponTakeInfra.Auth** responsable to login and sign a user, it uses JWT to authorize the request. He also use Argon2 to to encript the user's password to store into Postgres.
 The last one is the **CouponTakeInfra.CouponGeneration**, this service just create a new coupon code (aka GUID lol) and get informations from the database about it.
+```mermaid
+graph LR;
+    front([CouponTake])-->CouponTake.Gateway;
+    CouponTake.Gateway-->CouponTake.Auth;
+    CouponTake.Gateway-->CouponTake.CouponGeneration;
+    CouponTake.CouponGeneration-->db[(PostgresDB)];
+    CouponTake.Auth-->db[(PostgresDB)];
+```
+
+## Screenshots
+| Screenshot                                                                           |
+|--------------------------------------------------------------------------------------|
+![](https://github.com/LuanRoger/CouponTake/blob/main/screenshots/home_light.png)
+![](https://github.com/LuanRoger/CouponTake/blob/main/screenshots/home_dark.png)
+![](https://github.com/LuanRoger/CouponTake/blob/main/screenshots/home_dark_red.png)
+![](https://github.com/LuanRoger/CouponTake/blob/main/screenshots/home_dark_yellow.png)
 
 ## ☁️ Deploy
 You can easily deploy this project at DigitalOcean.
