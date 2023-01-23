@@ -16,7 +16,7 @@ class HomePage extends HookWidget {
       case 0:
         return const HomeSection();
       case 1:
-        return AccountSection();
+        return const AccountSection();
       case 2:
         return HistorySection();
       case 3:
@@ -112,7 +112,7 @@ class HomePage extends HookWidget {
                       label: AppLocalizations.of(context)!.navigationBarHistory,
                     ),
                     NavigationDestination(
-                      icon: Icon(Icons.settings_rounded),
+                      icon: const Icon(Icons.settings_rounded),
                       label:
                           AppLocalizations.of(context)!.navigationBarSettings,
                     )
