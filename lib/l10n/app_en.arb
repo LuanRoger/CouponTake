@@ -25,6 +25,13 @@
     "buttonLogin": "Login",
     "buttonSignin": "Signin",
     "page": "Page {pageNumb}",
+    "@page": {
+        "placeholders": {
+          "pageNumb": {
+            "type": "int"
+          }
+        }
+    },
     "noHistoryWarning": "There's no history",
     "theme": "Theme",
     "darkMode": "Dark mode",

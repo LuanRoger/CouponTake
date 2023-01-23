@@ -25,6 +25,13 @@
     "buttonLogin": "Entrar",
     "buttonSignin": "Cadastrar",
     "page": "Página {pageNumb}",
+    "@page": {
+        "placeholders": {
+          "pageNumb": {
+            "type": "int"
+          }
+        }
+    },
     "noHistoryWarning": "Não há histórico registrado",
     "theme": "Tema",
     "darkMode": "Modo escuro",
