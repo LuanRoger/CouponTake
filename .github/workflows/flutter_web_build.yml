@@ -1,0 +1,26 @@
+name: Flutter Web build
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: build
+        uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.8.0
+        with:
+          channel: 'beta'
+      - run: flutter pub get
+      - run: flutter build web --release
+
+      - name: pack
+        uses: actions/upload-artifact@v3
+        with:
+          name: web_build
+          path: build/web/
