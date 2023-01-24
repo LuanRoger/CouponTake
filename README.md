@@ -12,8 +12,9 @@ A complete solution to redeem random codes from a web API, the back-end was made
 - Postgres
 
 ## Setup
-You will need Flutter, Docker, Docker Compose and OpenSSL to setup and run the project.
-Flutter will be used to build the project for web, thre is no good Flutter image to get the job done, so we ganna do by own. If you dont have Flutter and don't want to install you can just skip the step, as the project has a pre-builded web project, but is highly recommended that you build by your self.
+You will need Docker, Docker Compose and OpenSSL to setup and run the project.
+Flutter will be used to build the project for web, there is no good Flutter image to get the job done, so we ganna do by own. If you are running in a enviroment that don't have Flutter and don't want to install you can just skip the [step](https://github.com/LuanRoger/CouponTake#build-the-flutter-project-for-the-web), on the [actions](https://github.com/LuanRoger/CouponTake/actions) tab you will find project builds that you can just download, but is highly recommended that you build by your self.
+[![Flutter Web build](https://github.com/LuanRoger/CouponTake/actions/workflows/flutter_web_build.yml/badge.svg?branch=main)](https://github.com/LuanRoger/CouponTake/actions/workflows/flutter_web_build.yml)
 
 The Docker will be used to build the images and run the containers and the Docker Composer is to create a cluster with all APIs and services running on.
 The OpenSSL is just to create the RSA keys used by ```CouponTakeInfra.Auth``` to sign the JWTs.
